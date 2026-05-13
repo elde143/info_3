@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ filename }}</title>
+    <link rel="stylesheet" href="/static/codemirror/codemirror.min.css">
+    <link rel="stylesheet" href="/static/codemirror/dracula.min.css">
+    <style>
+        body {
+            font-family: 'Nanum Gothic', sans-serif;
+            background: #1e1e2e;
+            color: #cdd6f4;
+            padding: 30px;
+        }
+        h2 { color: #cba6f7; margin-bottom: 16px; }
+
+        .filename {
+            background: #313244;
+            padding: 10px 16px;
+            border-radius: 6px;
+            font-family: monospace;
+            color: #a6e3a1;
+            margin-bottom: 16px;
+            font-size: 0.95rem;
+        }
+        .CodeMirror {
+            height: auto;
+            font-size: 15px;
+            border-radius: 8px;
+        }
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 16px;
+            background: #585b70;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .back-btn:hover { background: #45475a; }
+    </style>
+</head>
+<body>
+    <a class="back-btn" href="/teacher">← 목록으로</a>
+    <h2>📄 제출 코드 보기</h2>
+    <div class="filename">📁 {{ filename }}</div>
+
+    <textarea id="viewer">{{ content }}</textarea>
+
+    <script src="/static/codemirror/codemirror.min.js"></script>
+    <script src="/static/codemirror/python.min.js"></script>
+    <script>
+        CodeMirror.fromTextArea(document.getElementById('viewer'), {
+            mode       : 'python',
+            theme      : 'dracula',
+            lineNumbers: true,
+            readOnly   : true   // 읽기 전용
+        });
+    </script>
+</body>
+</html>

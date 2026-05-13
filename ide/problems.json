@@ -1,0 +1,252 @@
+[
+  {
+    "id": 101,
+    "title": "🌈 [1차시-1] 첫 인사 나누기",
+    "desc": "화면에 글자를 띄울 때는 print()를 사용합니다. '반갑습니다'를 출력해 보세요.",
+    "initial_code": "# 괄호 안에 '반갑습니다'를 따옴표와 함께 적으세요.\nprint()",
+    "test_cases": [{"output": "반갑습니다"}],
+    "category": "1-1차시: 출력과 자료형",
+    "model_answer": "print('반갑습니다')",
+    "answer_password": "101"
+  },
+  {
+    "id": 102,
+    "title": "🌈 [1차시-2] 따옴표의 마법",
+    "desc": "따옴표 안에 적으면 '글자'가 되고, 그냥 적으면 '숫자'가 됩니다. 숫자 2026를 출력해 보세요.",
+    "initial_code": "print()",
+    "test_cases": [{"output": "2026"}],
+    "category": "1-1차시: 출력과 자료형",
+    "model_answer": "print(2026)",
+    "answer_password": "102"
+  },
+  {
+    "id": 103,
+    "title": "🌈 [1차시-3] 여러 개 출력하기",
+    "desc": "쉼표(,)를 사용하면 여러 데이터를 한 번에 출력할 수 있습니다. '나의 나이:', 14 를 출력해 보세요.",
+    "initial_code": "print('나의 나이:', )",
+    "test_cases": [{"output": "나의 나이: 14"}],
+    "category": "1-1차시: 출력과 자료형",
+    "model_answer": "print('나의 나이:', 14)",
+    "answer_password": "103"
+  },
+  {
+    "id": 104,
+    "title": "🌈 [1차시-4] 줄 바꿈 연습",
+    "desc": "print()를 두 번 사용하면 줄이 바뀝니다. 첫 줄엔 '안녕', 둘째 줄엔 '파이썬'을 출력하세요.",
+    "initial_code": "print('안녕')\n",
+    "test_cases": [{"output": "안녕\n파이썬"}],
+    "category": "1-1차시: 출력과 자료형",
+    "model_answer": "print('안녕')\nprint('파이썬')",
+    "answer_password": "104"
+  },
+  {
+    "id": 105,
+    "title": "💡 [1차시-5] 문제해결: 자기소개 명함",
+    "desc": "[실생활] 화면에 자신의 이름과 좋아하는 것을 두 줄로 출력하는 명함을 만들어 보세요.",
+    "initial_code": "# 예시: \n# 이름: 홍길동\n# 취미: 축구\n",
+    "test_cases": [{"output": "이름: .+\n취미: .+"}],
+    "category": "1-1차시: 출력과 자료형",
+    "model_answer": "print('이름: 홍길동')\nprint('취미: 축구')",
+    "answer_password": "105"
+  },
+  {
+    "id": 106,
+    "title": "📦 [2차시-1] 이름표 붙이기(변수)",
+    "desc": "변수는 정보를 담는 바구니입니다. food라는 이름의 변수에 '떡볶이'를 담아보세요.",
+    "initial_code": "food = \nprint(food)",
+    "test_cases": [{"output": "떡볶이"}],
+    "category": "1-2차시: 변수와 입력",
+    "model_answer": "food = '떡볶이'\nprint(food)",
+    "answer_password": "106"
+  },
+  {
+    "id": 107,
+    "title": "📦 [2차시-2] 값 바꾸기",
+    "desc": "변수에 새로운 값을 넣으면 원래 있던 값은 사라집니다. a를 10에서 20으로 바꿔보세요.",
+    "initial_code": "a = 10\na = \nprint(a)",
+    "test_cases": [{"output": "20"}],
+    "category": "1-2차시: 변수와 입력",
+    "model_answer": "a = 10\na = 20\nprint(a)",
+    "answer_password": "107"
+  },
+  {
+    "id": 108,
+    "title": "📥 [2차시-3] 물어보고 듣기(input)",
+    "desc": "input()은 사용자의 대답을 변수에 저장합니다. 빈칸에 input()을 써보세요.",
+    "initial_code": "name = \nprint(name, '님 환영합니다!')",
+    "test_cases": [{"input": "지수", "output": "지수 님 환영합니다!"}],
+    "category": "1-2차시: 변수와 입력",
+    "model_answer": "name = input()\nprint(name, '님 환영합니다!')",
+    "answer_password": "108"
+  },
+  {
+    "id": 109,
+    "title": "📥 [2차시-4] 여러 번 입력받기",
+    "desc": "변수 두 개(color, fruit)를 만들어 각각 입력받은 값을 저장해 보세요.",
+    "initial_code": "color = input()\nfruit = \nprint(color, fruit)",
+    "test_cases": [{"input": "빨간\n사과", "output": "빨간 사과"}],
+    "category": "1-2차시: 변수와 입력",
+    "model_answer": "color = input()\nfruit = input()\nprint(color, fruit)",
+    "answer_password": "109"
+  },
+  {
+    "id": 110,
+    "title": "💡 [2차시-5] 문제해결: 앵무새 로봇",
+    "desc": "[실생활] 사용자가 입력한 말을 그대로 두 번 반복해서 말하는 앵무새 로봇을 만들어 보세요.",
+    "initial_code": "word = input()\n# 코드를 완성하세요.\n",
+    "test_cases": [{"input": "배고파", "output": "배고파\n배고파"}],
+    "category": "1-2차시: 변수와 입력",
+    "model_answer": "word = input()\nprint(word)\nprint(word)",
+    "answer_password": "110"
+  },
+  {
+    "id": 111,
+    "title": "🔢 [3차시-1] 숫자로 변신!(int)",
+    "desc": "입력받은 대답은 글자라서 계산이 안 됩니다. int()를 씌워 숫자로 바꿔보세요.",
+    "initial_code": "data = input()\nnumber = (data) # 괄호 앞에 int를 적으세요.\nprint(number + 10)",
+    "test_cases": [{"input": "5", "output": "15"}],
+    "category": "1-3차시: 연산과 형변환",
+    "model_answer": "data = input()\nnumber = int(data)\nprint(number + 10)",
+    "answer_password": "111"
+  },
+  {
+    "id": 112,
+    "title": "🔢 [3차시-2] 더하기와 빼기",
+    "desc": "두 숫자를 입력받아 두 수의 차(a - b)를 출력해 보세요.",
+    "initial_code": "a = int(input())\nb = int(input())\n# 여기에 a에서 b를 뺀 결과를 출력하세요.\n",
+    "test_cases": [{"input": "10\n3", "output": "7"}],
+    "category": "1-3차시: 연산과 형변환",
+    "model_answer": "a = int(input())\nb = int(input())\nprint(a - b)",
+    "answer_password": "112"
+  },
+  {
+    "id": 113,
+    "title": "🔢 [3차시-3] 곱하기와 나누기",
+    "desc": "숫자 n을 입력받아 2배를 한 결과와 2로 나눈 결과를 각각 출력해 보세요.",
+    "initial_code": "n = int(input())\nprint()  # 괄호 안에 n에 2를 곱하는 식을 입력하세요.\nprint()  # 괄호 안에 n을 2로 나누는 식을 입력하세요.",
+    "test_cases": [{"input": "10", "output": "20\n5.0"}],
+    "category": "1-3차시: 연산과 형변환",
+    "model_answer": "n = int(input())\nprint(n * 2)\nprint(n / 2)",
+    "answer_password": "113"
+  },
+  {
+    "id": 114,
+    "title": "🔢 [3차시-4] 나머지 구하기",
+    "desc": "나눗셈의 나머지를 구할 때는 % 기호를 사용합니다. 10을 n으로 나눈 나머지를 출력해 보세요.",
+    "initial_code": "n = int(input())\n# 10 % n 의 결과를 출력하세요.\n",
+    "test_cases": [{"input": "3", "output": "1"}],
+    "category": "1-3차시: 연산과 형변환",
+    "model_answer": "n = int(input())\nprint(10 % n)",
+    "answer_password": "114"
+  },
+  {
+    "id": 115,
+    "title": "💡 [3차시-5] 문제해결: 사탕 쇼핑",
+    "desc": "[실생활] 한 개에 500원인 사탕을 n개 샀을 때 내야 할 총 금액을 계산해 보세요.",
+    "initial_code": "n = int(input())\n# 결과 = 500 * n\n",
+    "test_cases": [{"input": "4", "output": "2000"}],
+    "category": "1-3차시: 연산과 형변환",
+    "model_answer": "n = int(input())\nprint(500 * n)",
+    "answer_password": "115"
+  },
+  {
+    "id": 206,
+    "title": "🚦 [2차시-1] if문의 첫걸음",
+    "desc": "조건이 참일 때만 실행됩니다. score가 60 이상이면 '합격'을 출력하게 빈칸을 채우세요.",
+    "initial_code": "score = 80\nif score >= 60:\n    # 여기에 코드를 작성하세요\n    ",
+    "test_cases": [{"output": "합격"}],
+    "category": "2-2차시: if-else 구조",
+    "model_answer": "score = 80\nif score >= 60:\n    print('합격')",
+    "answer_password": "206"
+  },
+  {
+    "id": 207,
+    "title": "🚦 [2차시-2] 들여쓰기 교정",
+    "desc": "if문 아래 줄은 반드시 들여쓰기(Space 4번)를 해야 합니다. 에러가 난 코드를 수정하세요.",
+    "initial_code": "n = 10\nif n > 5:\nprint('n은 5보다 크다')",
+    "test_cases": [{"output": "n은 5보다 크다"}],
+    "category": "2-2차시: if-else 구조",
+    "model_answer": "n = 10\nif n > 5:\n    print('n은 5보다 크다')",
+    "answer_password": "207"
+  },
+  {
+    "id": 208,
+    "title": "🚦 [2차시-3] 아니면(else)",
+    "desc": "조건이 맞지 않을 때 실행할 코드는 else: 뒤에 적습니다. 60점 미만일 때 '불합격'이 나오게 하세요.",
+    "initial_code": "score = 40\nif score >= 60:\n    print('합격')\nelse:\n    ",
+    "test_cases": [{"output": "불합격"}],
+    "category": "2-2차시: if-else 구조",
+    "model_answer": "score = 40\nif score >= 60:\n    print('합격')\nelse:\n    print('불합격')",
+    "answer_password": "208"
+  },
+  {
+    "id": 209,
+    "title": "🚦 [2차시-4] 숫자 판별기",
+    "desc": "입력받은 수 n이 0보다 크면 '양수', 그렇지 않으면 '음수 또는 0'을 출력하세요.",
+    "initial_code": "n = int(input())\nif n > 0:\n    print('양수')\nelse:\n    ",
+    "test_cases": [{"input": "5", "output": "양수"}, {"input": "-2", "output": "음수 또는 0"}],
+    "category": "2-2차시: if-else 구조",
+    "model_answer": "n = int(input())\nif n > 0:\n    print('양수')\nelse:\n    print('음수 또는 0')",
+    "answer_password": "209"
+  },
+  {
+    "id": 210,
+    "title": "💡 [2차시-5] 문제해결: 홀짝 판별",
+    "desc": "[실생활] 2로 나눈 나머지(%)가 0이면 짝수, 아니면 홀수입니다. 빈칸을 채워 판별기를 완성하세요.",
+    "initial_code": "n = int(input())\nif n % 2 == 0:\n    print('짝수')\nelse:\n    ",
+    "test_cases": [{"input": "2", "output": "짝수"}, {"input": "3", "output": "홀수"}],
+    "category": "2-2차시: if-else 구조",
+    "model_answer": "n = int(input())\nif n % 2 == 0:\n    print('짝수')\nelse:\n    print('홀수')",
+    "answer_password": "210"
+  },
+  {
+    "id": 211,
+    "title": "🚥 [3차시-1] 세 갈래 길(elif)",
+    "desc": "조건이 여러 개일 때는 elif를 씁니다. n이 양수면 P, 음수면 M, 0이면 Z를 출력하세요.",
+    "initial_code": "n = int(input())\nif n > 0:\n    print('P')\n n < 0: # 빈칸을 채우세요\n    print('M')\nelse:\n    print('Z')",
+    "test_cases": [{"input": "0", "output": "Z"}],
+    "category": "2-3차시: 다중 조건문(elif)",
+    "model_answer": "n = int(input())\nif n > 0:\n    print('P')\nelif n < 0:\n    print('M')\nelse:\n    print('Z')",
+    "answer_password": "211"
+  },
+  {
+    "id": 212,
+    "title": "🚥 [3차시-2] 신호등 규칙",
+    "desc": "초록불(green)이면 GO, 노란불(yellow)이면 WAIT, 그 외에는 STOP을 출력하세요.",
+    "initial_code": "light = input()\nif light == 'green':\n    print('GO')\nelif light == 'yellow':\n    \nelse:\n    ",
+    "test_cases": [{"input": "yellow", "output": "WAIT"}, {"input": "red", "output": "STOP"}],
+    "category": "2-3차시: 다중 조건문(elif)",
+    "model_answer": "light = input()\nif light == 'green':\n    print('GO')\nelif light == 'yellow':\n    print('WAIT')\nelse:\n    print('STOP')",
+    "answer_password": "212"
+  },
+  {
+    "id": 213,
+    "title": "🚥 [3차시-3] 점수 등급 나누기",
+    "desc": "90점 이상 A, 80점 이상 B, 그 외에는 C를 출력하는 프로그램을 완성하세요.",
+    "initial_code": "score = int(input())\nif score >= 90:\n    print('A')\n \n    ",
+    "test_cases": [{"input": "85", "output": "B"}, {"input": "70", "output": "C"}],
+    "category": "2-3차시: 다중 조건문(elif)",
+    "model_answer": "score = int(input())\nif score >= 90:\n    print('A')\nelif score >= 80:\n    print('B')\nelse:\n    print('C')",
+    "answer_password": "213"
+  },
+  {
+    "id": 214,
+    "title": "🚥 [3차시-4] 버스 요금 계산기",
+    "desc": "나이가 20세 이상이면 1250, 13세 이상이면 720, 그 외에는 450을 출력하세요.",
+    "initial_code": "age = int(input())\nif age >= 20:\n    print(1250)\n# 여기에 elif와 else를 작성하세요\n",
+    "test_cases": [{"input": "15", "output": "720"}, {"input": "10", "output": "450"}],
+    "category": "2-3차시: 다중 조건문(elif)",
+    "model_answer": "age = int(input())\nif age >= 20:\n    print(1250)\nelif age >= 13:\n    print(720)\nelse:\n    print(450)",
+    "answer_password": "214"
+  },
+  {
+    "id": 215,
+    "title": "💡 [3차시-5] 문제해결: 온도 센서",
+    "desc": "[실생활] 온도(temp)를 입력받아 28도 이상이면 '에어컨', 15도 이하이면 '히터', 그 사이면 '환기'를 추천해 주는 로봇을 만드세요.",
+    "initial_code": "temp = int(input())\n# if-elif-else를 사용하여 완성하세요.\n",
+    "test_cases": [{"input": "30", "output": "에어컨"}, {"input": "10", "output": "히터"}, {"input": "20", "output": "환기"}],
+    "category": "2-3차시: 다중 조건문(elif)",
+    "model_answer": "temp = int(input())\nif temp >= 28:\n    print('에어컨')\nelif temp <= 15:\n    print('히터')\nelse:\n    print('환기')",
+    "answer_password": "215"
+  }
+]

@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>파이썬 코딩 연습</title>
+    <link rel="stylesheet" href="/static/codemirror/codemirror.min.css">
+    <link rel="stylesheet" href="/static/codemirror/dracula.min.css">
+    <style>
+        /* [원본 스타일 유지] */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Nanum Gothic', sans-serif;
+            background: #faf8f8;
+            color: #1a1a1a;
+            padding: 0;
+            /* 20px에서 0으로 변경 */
+            margin: 0;
+            /* 확실히 하기 위해 추가 */
+            overflow: hidden;
+            /* 외측 스크롤 강제 금지 */
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .header h1 {
+            color: #1a1a1a;
+            font-size: 1.6rem;
+            font-weight: 800;
+        }
+
+        .student-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #ffffff;
+            padding: 10px 16px;
+            border-radius: 10px;
+            border: 1px solid #e5e5e5;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            flex-wrap: wrap;
+        }
+
+        .student-info label {
+            color: #555555;
+            font-size: 0.9rem;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .student-info input {
+            background: #ffffff;
+            border: 1px solid #cccccc;
+            border-radius: 6px;
+            color: #1a1a1a;
+            padding: 6px 10px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border 0.2s;
+        }
+
+        .student-info input:focus {
+            border-color: #635bff;
+        }
+
+        #input-student-id {
+            width: 110px;
+        }
+
+        #input-name {
+            width: 90px;
+        }
+
+        .btn-submit {
+            background: #635bff;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-submit:hover {
+            background: #4f46e5;
+        }
+
+        .problem-box {
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin-bottom: 16px;
+        }
+
+        .problem-title {
+            color: #635bff;
+            font-size: 1.15rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .problem-desc {
+            color: #333333;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            white-space: pre-wrap;
+        }
+
+        .btn-reset-code {
+            background: transparent;
+            border: 1px solid #635bff;
+            color: #635bff;
+            padding: 4px 12px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-left: auto;
+            transition: all 0.2s;
+        }
+
+        .btn-reset-code:hover {
+            background: #635bff;
+            color: white;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .editor-box {
+            border: 1px solid #e5e5e5;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .CodeMirror {
+            height: 360px;
+            font-size: 15px;
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .btn-run {
+            background: #635bff;
+            color: white;
+            border: none;
+            padding: 10px 28px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-run:hover {
+            background: #4f46e5;
+        }
+
+        .btn-judge {
+            background: #2e7d32;
+            color: white;
+            border: none;
+            padding: 10px 28px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-judge:hover {
+            background: #1b5e20;
+        }
+
+        .btn-clear {
+            background: #f0f0f0;
+            color: #333333;
+            border: 1px solid #dddddd;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-clear:hover {
+            background: #e5e5e5;
+        }
+
+        .label {
+            color: #444444;
+            margin: 10px 0 6px;
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+
+        #output-box {
+            background: #181825;
+            border: 2px solid #45475a;
+            border-radius: 8px;
+            padding: 14px;
+            min-height: 200px;
+            max-height: 400px;
+            overflow-y: auto;
+            font-family: 'Fira Code', 'Cascadia Code', monospace;
+            font-size: 14px;
+            color: #f8f8f2;
+            white-space: pre-wrap;
+            line-height: 1.6;
+            cursor: text;
+        }
+
+        .terminal-input {
+            background: transparent;
+            border: none;
+            color: #a6e3a1;
+            font-weight: bold;
+            font-family: inherit;
+            font-size: inherit;
+            outline: none;
+            width: auto;
+            min-width: 10px;
+            padding: 0;
+            margin: 0;
+        }
+
+        .text-error {
+            color: #f38ba8;
+        }
+
+        .text-success {
+            color: #a6e3a1;
+        }
+
+        #judgeResult {
+            background: #e8f5e9;
+            border: 1px solid #c8e6c9;
+            border-radius: 8px;
+            padding: 14px;
+            font-size: 0.95rem;
+            display: none;
+            margin-bottom: 10px;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal {
+            background: #ffffff;
+            border: 1px solid #e5e5e5;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 30px 36px;
+            text-align: center;
+            max-width: 380px;
+            width: 90%;
+        }
+
+        .modal h2 {
+            color: #635bff;
+            margin-bottom: 14px;
+        }
+
+        .modal p {
+            line-height: 1.7;
+            color: #333333;
+            font-size: 0.95rem;
+            white-space: pre-wrap;
+        }
+
+        .modal .btn-ok {
+            margin-top: 20px;
+            background: #635bff;
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .modal.error-modal {
+            border-color: #d32f2f;
+        }
+
+        .modal.error-modal h2 {
+            color: #d32f2f;
+        }
+
+        .modal.error-modal .btn-ok {
+            background: #d32f2f;
+        }
+
+        .modal-confirm .btn-row-modal {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .btn-confirm-ok {
+            background: #635bff;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-confirm-cancel {
+            background: #f0f0f0;
+            color: #333333;
+            border: 1px solid #dddddd;
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="layout-wrapper" style="display: flex; height: 100vh; overflow: hidden; border: none;">
+        {% if not config.exam_active %}
+        <div class="sidebar" id="practice-sidebar"
+            style="width: 250px; background: #ffffff; padding: 20px; overflow-y: auto; border-right: 1px solid #e5e5e5;">
+            <h2 style="color: #635bff; font-size: 1.1rem; margin-bottom: 20px;">
+                <div style="text-align: center; font-weight: bold; margin: 10px 0;">연습문제 목록</div>
+            </h2>
+            <div id="practice-tabs-list" style="display: flex; flex-direction: column; gap: 8px;">
+                <div style="color:#888888; font-size: 0.9rem; text-align:center;">불러오는 중...</div>
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="container"
+            style="flex: 1; margin: 0; max-width: none; overflow-y: auto; padding: 20px; background: #ffffff;">
+            <div class="header">
+                {% if config.exam_active %}
+                <h1 style="color: #d32f2f;">:: 갈매고 파이썬 수행평가 진행 중 ::</h1>
+                {% else %}
+                <h1>👩‍💻갈매고 파이썬 코딩 연습👨‍💻</h1>
+                {% endif %}
+                <div class="student-info">
+                    <label>학번</label>
+                    <input type="text" id="input-student-id" placeholder="예) 10135" maxlength="20" {% if
+                        already_submitted %}disabled{% endif %}>
+                    <label>이름</label>
+                    <input type="text" id="input-name" placeholder="예) 김갈매" maxlength="10" {% if already_submitted
+                        %}disabled{% endif %}>
+                    {% if already_submitted %}
+                    <button class="btn-submit"
+                        style="background:#f0f0f0; border: 1px solid #cccccc; color:#333333; cursor:not-allowed;"
+                        disabled>🚫 제출 완료됨</button>
+                    {% else %}
+                    <button class="btn-submit" id="main-submit-btn" onclick="submitCode()">📤 최종 제출</button>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% if config.exam_active %}
+            <div class="problem-box" id="problem-box" style="background:#fffafa; border-color:#d32f2f;">
+                <div class="problem-title" style="color:#d32f2f;">
+                    📌 {{ config.exam_title }}
+                    <button class="btn-reset-code" onclick="confirmReset()"
+                        style="border-color:#f38ba8; color:#f38ba8;">🔄 초기 코드로 되돌리기</button>
+                </div>
+                {% if config.exam_desc %}
+                <div class="problem-desc">{{ config.exam_desc }}</div>
+                {% endif %}
+            </div>
+            {% else %}
+            <div class="problem-box" id="problem-box">
+                <div class="problem-title" style="display: flex; align-items: center;">
+                    <span id="current-practice-title">자유 연습 모드</span>
+                    <button class="btn-reset-code" onclick="showModelAnswer()"
+                        style="margin-left: auto; border-color:#2e7d32; color:#2e7d32;">💡 모범 답안 보기</button>
+                    <button class="btn-reset-code" onclick="confirmReset()" style="margin-left: 8px;">🔄 초기 코드로
+                        되돌리기</button>
+                </div>
+                <div class="problem-desc" id="current-practice-desc">원하는 코드를 자유롭게 작성하거나, 좌측에서 연습문제를 선택하세요.</div>
+            </div>
+            {% endif %}
+
+            <div class="label">📝 코드 작성</div>
+            <div class="editor-box">
+                <div style="display: flex; justify-content: flex-end; margin-bottom: 5px; gap: 5px;">
+                    <button class="btn btn-gray" onclick="changeFontSize(2)"
+                        style="padding: 2px 8px; font-size: 0.9rem;">코드크기 +</button>
+                    <button class="btn btn-gray" onclick="changeFontSize(-2)"
+                        style="padding: 2px 8px; font-size: 0.9rem;">코드크기 -</button>
+                </div>
+                <textarea id="code-editor">{{ config.exam_initial_code if config.exam_active else '' }}</textarea>
+            </div>
+
+            <div class="btn-row">
+                <button class="btn-run" onclick="runCode()">▶ 실행하기</button>
+                <button class="btn-judge" onclick="judgeCode()">✅ 자동 채점하기</button>
+                <button class="btn-clear" onclick="clearOutput()">🗑 터미널 내용 지우기</button>
+            </div>
+
+            <div id="judgeResult"></div>
+
+            <div class="label">💻 터미널 (실행 결과 & 입력)</div>
+            <div id="output-box" onclick="focusTerminal()">결과가 여기에 표시됩니다...</div>
+
+            <div style="text-align: right; padding-top: 40px; font-size: 11px; color: #888; font-weight: bold;">
+                ⓒ 2026. gt. All rights reserved.
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+        <div class="modal" id="modal-box">
+            <h2 id="modal-title"></h2>
+            <p id="modal-msg"></p>
+            <button class="btn-ok" onclick="closeModalDirect()">확인</button>
+        </div>
+    </div>
+    <div class="modal-overlay" id="confirm-overlay">
+        <div class="modal modal-confirm">
+            <h2 style="color:#0062ff;">🔄 초기 코드로 되돌리기</h2>
+            <p style="color:#ff0090; margin-top:10px;">작성한 코드가 모두 사라집니다.<br>정말 되돌릴까요?</p>
+            <div class="btn-row-modal">
+                <button class="btn-confirm-ok" onclick="resetCode()">네, 되돌리기</button>
+                <button class="btn-confirm-cancel" onclick="closeConfirm()">취소</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal-overlay" id="exam-confirm-overlay">
+        <div class="modal modal-confirm" style="border-color:#f38ba8;">
+            <h2 style="color:#fb0e51;">⚠️ 최종 제출 확인</h2>
+            <p style="color:#3665ff; margin-top:10px;">단 한 번만 제출할 수 있습니다.<br>정말 제출하시겠습니까?</p>
+            <div class="btn-row-modal">
+                <button class="btn-confirm-ok" style="background:#f38ba8; color:#1e1e2e;"
+                    onclick="doSubmit()">제출하기</button>
+                <button class="btn-confirm-cancel" onclick="closeExamConfirm()">취소</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/codemirror/codemirror.min.js"></script>
+    <script src="/static/codemirror/python.min.js"></script>
+    <script>
+        const IS_EXAM_MODE = {{ 'true' if config.exam_active else 'false' }};
+        const PRACTICE_CATEGORIES = {{ config.get('practice_categories', ['일반']) | tojson | safe }};
+        let INITIAL_CODE = `{{ config.exam_initial_code if config.exam_active else '' }}`;
+        let currentProblemId = IS_EXAM_MODE ? 'exam' : null;
+
+        const editor = CodeMirror.fromTextArea(document.getElementById('code-editor'), {
+            mode: 'python', theme: 'dracula', lineNumbers: true, indentUnit: 4, tabSize: 4, lineWrapping: true,
+            extraKeys: { "Tab": cm => cm.replaceSelection("    "), "Ctrl-Enter": () => runCode() }
+        });
+
+        const PYTHON_BANNER = 'Python 3.10.8 (tags/v3.10.8:aaaf517, Oct 11 2022, 16:50:30) [MSC v.1933 64 bit (AMD64)] on win32\nType "help", "copyright", "credits" or "license" for more information.\n';
+        const WIN_PROMPT = 'C:\\Users\\Student> ';
+
+        if (!sessionStorage.getItem('sandbox_session_id')) {
+            sessionStorage.setItem('sandbox_session_id', 'sess_' + Math.random().toString(36).substring(2, 10));
+        }
+        const SESSION_ID = sessionStorage.getItem('sandbox_session_id');
+
+        let currentSessionInputs = [];
+        let isRunning = false;
+        let lastOutput = "";
+        let practiceProblems = [];
+        let currentFontSize = 16;
+
+        function changeFontSize(delta) {
+            currentFontSize += delta;
+            if (currentFontSize < 10) currentFontSize = 10;
+            if (currentFontSize > 60) currentFontSize = 60;
+            const cmElement = editor.getWrapperElement();
+            cmElement.style.fontSize = currentFontSize + 'px';
+            editor.refresh();
+        }
+
+        async function loadPracticeProblems() {
+            if (IS_EXAM_MODE) return;
+            try {
+                const res = await fetch('/api/problems');
+                practiceProblems = await res.json();
+                renderPracticeSidebar();
+            } catch (e) {
+                document.getElementById('practice-tabs-list').innerHTML = '<div style="color:#f38ba8;">불러오기 실패</div>';
+            }
+        }
+
+        function renderPracticeSidebar() {
+            const list = document.getElementById('practice-tabs-list');
+            const freeModeBtn = `<button class="btn-clear" style="text-align:left; padding:10px; background:#e3f2fd; color:#1976d2; font-weight:bold; width: 100%; border: 1px solid #bbdefb; margin-bottom: 12px;" onclick="selectFreePractice()">자유 연습 모드</button>`;
+            if (practiceProblems.length === 0) { list.innerHTML = freeModeBtn + '<div style="color:#888888; text-align:center;">등록된 연습문제가 없습니다.</div>'; return; }
+            const categorized = {};
+            PRACTICE_CATEGORIES.forEach(cat => categorized[cat] = []);
+            if (!categorized['일반']) categorized['일반'] = [];
+            practiceProblems.forEach((p, i) => {
+                const cat = p.category || '일반';
+                if (!categorized[cat]) categorized[cat] = [];
+                categorized[cat].push({ p, idx: i });
+            });
+            let html = freeModeBtn;
+            for (const cat of PRACTICE_CATEGORIES) {
+                if (categorized[cat] && categorized[cat].length > 0) {
+                    html += `<details style="margin-bottom: 8px;">
+                                <summary style="font-weight:bold; color:#555; cursor:pointer; padding:6px; background:#f0f0f0; border-radius:4px; border: 1px solid #e0e0e0;">📂 ${cat}</summary>
+                                <div style="padding-left: 10px; margin-top:6px; display:flex; flex-direction:column; gap:4px;">`;
+                    categorized[cat].forEach(item => {
+                        html += `<button class="btn-clear" style="text-align:left; padding:8px; background:#ffffff; width: 100%; color: #333333; border: 1px solid #dddddd; font-size: 0.9rem;" onclick="selectPractice(${item.idx})">${item.idx + 1}. ${item.p.title}</button>`;
+                    });
+                    html += `</div></details>`;
+                }
+            }
+            list.innerHTML = html;
+        }
+
+        function selectFreePractice() {
+            currentProblemId = null;
+            document.getElementById('current-practice-title').textContent = '자유 연습 모드';
+            document.getElementById('current-practice-desc').textContent = '원하는 코드를 자유롭게 작성하거나, 좌측에서 연습문제를 선택하세요.';
+            INITIAL_CODE = ''; editor.setValue(INITIAL_CODE); clearOutput();
+            document.getElementById('judgeResult').style.display = 'none';
+        }
+
+        function selectPractice(index) {
+            const p = practiceProblems[index];
+            currentProblemId = p.id;
+            document.getElementById('current-practice-title').textContent = '연습문제 ' + (index + 1) + ': ' + p.title;
+            document.getElementById('current-practice-desc').textContent = p.desc || '자유롭게 연습하세요.';
+            INITIAL_CODE = p.initial_code; editor.setValue(INITIAL_CODE); clearOutput();
+            document.getElementById('judgeResult').style.display = 'none';
+        }
+
+        window.onload = () => {
+            const outputBox = document.getElementById('output-box');
+            if (outputBox) { outputBox.innerHTML = ''; lastOutput = PYTHON_BANNER + WIN_PROMPT; renderInitialTerminal(); }
+            loadPracticeProblems();
+            // loadSandboxFiles(); // 제거됨
+        };
+
+        function renderInitialTerminal() {
+            const outputBox = document.getElementById('output-box');
+            outputBox.innerHTML = '';
+            const banner = document.createElement('span'); banner.className = 'text-muted'; banner.textContent = PYTHON_BANNER;
+            outputBox.appendChild(banner);
+            appendPrompt();
+        }
+
+        function appendPrompt(showLabel = true) {
+            const outputBox = document.getElementById('output-box');
+            if (showLabel) {
+                const promptSpan = document.createElement('span'); promptSpan.className = 'text-success'; promptSpan.textContent = WIN_PROMPT;
+                outputBox.appendChild(promptSpan);
+            }
+            const inputField = document.createElement('input');
+            inputField.type = 'text'; inputField.className = 'terminal-input'; inputField.id = 'active-terminal-input'; inputField.autocomplete = 'off';
+            inputField.onkeydown = async (e) => {
+                if (e.key === 'Enter') {
+                    const val = inputField.value; inputField.disabled = true; currentSessionInputs.push(val); await runCode(true);
+                }
+            };
+            outputBox.appendChild(inputField); inputField.focus(); outputBox.scrollTop = outputBox.scrollHeight;
+        }
+
+        function ensureNewLine() {
+            const outputBox = document.getElementById('output-box');
+            const lastChild = outputBox.lastChild;
+            if (lastChild && lastChild.textContent && !lastChild.textContent.endsWith('\n')) {
+                outputBox.appendChild(document.createTextNode('\n'));
+            }
+        }
+
+        function focusTerminal() { const input = document.getElementById('active-terminal-input'); if (input) input.focus(); }
+        function clearOutput() { const outputBox = document.getElementById('output-box'); currentSessionInputs = []; window._lastPureLength = 0; lastOutput = PYTHON_BANNER + WIN_PROMPT; renderInitialTerminal(); }
+
+        async function runCode(isContinuation = false) {
+            if (isRunning && !isContinuation) return;
+            const outputBox = document.getElementById('output-box');
+            const studentId = document.getElementById('input-student-id').value.trim();
+            if (!isContinuation) {
+                currentSessionInputs = [];
+                const oldInput = document.getElementById('active-terminal-input');
+                if (oldInput) { oldInput.value = "python student_code.py\n\n"; oldInput.disabled = true; }
+                lastOutput += "python student_code.py\n\n";
+            }
+            isRunning = true;
+            try {
+                const res = await fetch('/run', {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ code: editor.getValue(), inputs: currentSessionInputs, student_id: studentId, session_id: SESSION_ID })
+                });
+                const data = await res.json();
+                renderTerminal(data.output || '', data.error || '', data.status);
+            } catch (err) {
+                renderTerminal('', '서버 연결 오류가 발생했습니다.', 'error');
+            } finally {
+                isRunning = false;
+                // loadSandboxFiles(); // 제거됨
+            }
+        }
+
+        function renderTerminal(output, error, status) {
+            const outputBox = document.getElementById('output-box');
+            const oldInput = document.getElementById('active-terminal-input');
+            if (oldInput) {
+                const val = oldInput.value;
+                const textNode = document.createTextNode(val + (val.endsWith('\n') ? '' : '\n'));
+                oldInput.parentNode.replaceChild(textNode, oldInput);
+            }
+            let newContent = output;
+            const pureOutput = output;
+            const currentPureOutputLength = window._lastPureLength || 0;
+            newContent = pureOutput.substring(currentPureOutputLength);
+            window._lastPureLength = pureOutput.length;
+            if (newContent) { const pre = document.createElement('span'); pre.textContent = newContent; outputBox.appendChild(pre); }
+            if (error && !error.includes('시간 초과')) { const errDiv = document.createElement('div'); errDiv.className = 'text-error'; errDiv.textContent = error; outputBox.appendChild(errDiv); }
+            if (status === 'finished' || status === 'error') { window._lastPureLength = 0; ensureNewLine(); appendPrompt(true); } else { appendPrompt(false); }
+            outputBox.scrollTop = outputBox.scrollHeight;
+        }
+
+        // loadSandboxFiles 함수 본체는 혹시 몰라 주석 처리 (에러 방지)
+        async function loadSandboxFiles() { return; }
+
+        function judgeCode() {
+            const studentId = document.getElementById('input-student-id').value.trim();
+            const code = editor.getValue();
+            if (!studentId) { showModal('⚠️ 입력 오류', '학번을 입력해주세요!', true); return; }
+            if (!code.trim()) { showModal('⚠️ 입력 오류', '코드를 작성해주세요!', true); return; }
+            if (!currentProblemId && !IS_EXAM_MODE) { showModal('⚠️ 알림', '자유 연습 모드에서는 채점할 수 없습니다. 왼쪽에서 연습문제를 선택해주세요.', false); return; }
+            const resultDiv = document.getElementById('judgeResult');
+            resultDiv.style.display = 'block'; resultDiv.innerHTML = '⏳ 채점 중입니다...';
+            fetch('/judge', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code: code, problem_id: currentProblemId, student_id: studentId }) })
+                .then(res => res.json()).then(data => {
+                    if (data.status === 'success') {
+                        resultDiv.style.backgroundColor = '#e8f5e9'; resultDiv.style.borderColor = '#c8e6c9';
+                        resultDiv.innerHTML = `<strong style="color: #2e7d32;">${data.message}</strong><br>⏱ 시간: ${data.time_sec || 'N/A'}초 | 💾 메모리: ${data.memory_kb || 'N/A'} KB`;
+                    } else {
+                        resultDiv.style.backgroundColor = '#ffebee'; resultDiv.style.borderColor = '#ffcdd2';
+                        let errorHtml = `<strong style="color: #d32f2f;">${data.message || '채점 실패'}</strong>`;
+                        if (data.expected) {
+                            errorHtml += `<br><br><b>기대 출력:</b><br><pre style="background:#fff; padding:5px; border-radius:4px;">${data.expected}</pre>`;
+                            errorHtml += `<b>실제 출력:</b><br><pre style="background:#fff; padding:5px; border-radius:4px; color:#d32f2f;">${data.actual}</pre>`;
+                        }
+                        if (data.error) errorHtml += `<br><pre style="color:red; background:#fff; padding:5px;">${data.error}</pre>`;
+                        resultDiv.innerHTML = errorHtml;
+                    }
+                }).catch(err => { resultDiv.innerHTML = `<span style="color: red;">서버 통신 오류가 발생했습니다.</span>`; });
+        }
+
+        async function submitCode() {
+            const student_id = document.getElementById('input-student-id').value.trim();
+            const name = document.getElementById('input-name').value.trim();
+            const code = editor.getValue();
+
+            if (!student_id) { showModal('⚠️ 입력 오류', '학번을 입력해주세요!', true); return; }
+            if (!name) { showModal('⚠️ 입력 오류', '이름을 입력해주세요!', true); return; }
+            if (!code.trim()) { showModal('⚠️ 입력 오류', '코드를 작성해주세요!', true); return; }
+
+            document.getElementById('exam-confirm-overlay').classList.add('show');
+        }
+        function closeExamConfirm() { document.getElementById('exam-confirm-overlay').classList.remove('show'); }
+
+        async function doSubmit() {
+            closeExamConfirm();
+            const student_id = document.getElementById('input-student-id').value.trim();
+            const name = document.getElementById('input-name').value.trim();
+            const code = editor.getValue();
+
+            try {
+                const res = await fetch('/submit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        student_id,
+                        name,
+                        code,
+                        problem_id: currentProblemId,
+                        is_final: true  // ✅ 이 줄을 반드시 추가해야 서버가 [최종]으로 저장합니다!
+                    })
+                });
+
+                const data = await res.json();
+                showModal(data.success ? '✅ 제출 완료!' : '❌ 제출 실패', data.message, !data.success);
+
+                if (data.success && IS_EXAM_MODE) {
+                    const btn = document.getElementById('main-submit-btn');
+                    if (btn) {
+                        btn.disabled = true;
+                        btn.style.background = '#585b70';
+                        btn.style.cursor = 'not-allowed';
+                        btn.textContent = '🚫 제출 완료됨';
+                        document.getElementById('input-student-id').disabled = true;
+                        document.getElementById('input-name').disabled = true;
+                    }
+                }
+            } catch (e) {
+                showModal('❌ 오류', '서버 연결 오류: ' + e, true);
+            }
+        }
+        function confirmReset() { document.getElementById('confirm-overlay').classList.add('show'); }
+        function closeConfirm() { document.getElementById('confirm-overlay').classList.remove('show'); }
+        function resetCode() { editor.setValue(INITIAL_CODE); closeConfirm(); }
+        function showModal(title, msg, isError) {
+            document.getElementById('modal-title').textContent = title; document.getElementById('modal-msg').textContent = msg;
+            document.getElementById('modal-box').className = isError ? 'modal error-modal' : 'modal';
+            document.getElementById('modal-overlay').classList.add('show');
+        }
+        function closeModal(e) { if (e.target.id === 'modal-overlay') closeModalDirect(); }
+        function closeModalDirect() { document.getElementById('modal-overlay').classList.remove('show'); }
+        async function showModelAnswer() {
+            if (!currentProblemId || currentProblemId === 'exam') { alert("현재 문제에서는 모범 답안 기능이 지원되지 않습니다."); return; }
+            const pwd = prompt("🔒 모범 답안 열람 비밀번호를 입력하세요:");
+            if (!pwd) return;
+            try {
+                const res = await fetch('/api/verify_answer', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ problem_id: currentProblemId, password: pwd }) });
+                const data = await res.json();
+                if (data.success) {
+                    showModal('💡 모범 답안', data.model_answer, false);
+                    const modalMsg = document.getElementById('modal-msg');
+                    modalMsg.style.textAlign = 'left'; modalMsg.style.fontFamily = 'monospace'; modalMsg.style.background = '#f4f6f8'; modalMsg.style.padding = '15px'; modalMsg.style.whiteSpace = 'pre-wrap';
+                } else { showModal('❌ 열람 실패', data.message, true); }
+            } catch (e) { alert('서버 오류가 발생했습니다.'); }
+        }
+    </script>
+</body>
+
+</html>

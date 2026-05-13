@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>교사용 관리 페이지</title>
+    <link rel="stylesheet" href="/static/codemirror/codemirror.min.css">
+    <link rel="stylesheet" href="/static/codemirror/dracula.min.css">
+    <style>
+        /* [이중 스크롤 방지 및 화면 고정 스타일] */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body {
+            height: 100vh; width: 100vw;
+            overflow: hidden; background: #faf8f8;
+            color: #1a1a1a; font-family: 'Nanum Gothic', sans-serif;
+        }
+        .main-scroll-area {
+            height: 100vh; overflow-y: auto;
+            padding: 30px; box-sizing: border-box;
+        }
+        h1 { color: #1a1a1a; margin-bottom: 24px; font-size: 1.6rem; font-weight: 800; }
+        h2 { color: #635bff; margin-bottom: 14px; font-size: 1.2rem; font-weight: 800; display: flex; justify-content: space-between; align-items: center; }
+        .section { background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 20px; margin-bottom: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #eee; font-size: 0.95rem; }
+        th { background: #f8f9fa; color: #555; font-weight: bold; }
+        .btn { padding: 6px 12px; border-radius: 6px; border: none; cursor: pointer; font-weight: bold; transition: 0.2s; text-decoration: none; display: inline-block; font-size: 0.9rem; }
+        .btn-blue { background: #635bff; color: white; }
+        .btn-green { background: #2e7d32; color: white; }
+        .btn-red { background: #d32f2f; color: white; }
+        .btn-sm { padding: 4px 8px; font-size: 0.85rem; }
+        .score-box { background: #e8f5e9; color: #2e7d32; padding: 4px 8px; border-radius: 4px; font-weight: bold; }
+
+        /* 인증 레이어 */
+        #auth-overlay { position: fixed; inset: 0; background: #635bff; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; }
+        .auth-box { background: white; padding: 30px; border-radius: 12px; display: flex; flex-direction: column; gap: 15px; width: 300px; box-shadow: 0 20px 50px rgba(0,0,0,0.2); }
+        .auth-box input { padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; text-align: center; color: #333; outline: none; }
+    </style>
+</head>
+
+<body>
+    <div id="auth-overlay">
+        <h2 style="color:white; margin-bottom:20px;">🔒 교사용 관리 모드</h2>
+        <div class="auth-box">
+            <input type="password" id="auth-pwd" placeholder="비밀번호 입력" onkeydown="if(event.key==='Enter') verifyAuth()">
+            <button class="btn btn-blue" onclick="verifyAuth()">로그인</button>
+        </div>
+    </div>
+
+    <div class="main-scroll-area">
+        <h1>👨‍🏫 교사용 대시보드</h1>
+
+        <div class="section">
+            <h2>
+                제출 현황
+                <button class="btn btn-blue" onclick="location.reload()">🔄 목록 새로고침</button>
+            </h2>
+            <table>
+                <thead>
+                    <tr><th>학번</th><th>이름</th><th>문제 ID</th><th>제출 시간</th><th>결과</th><th>관리</th></tr>
+                </thead>
+                <tbody>
+                    {% for s in submissions %}
+                    <tr>
+                        <td>{{ s.student_id }}</td><td>{{ s.name }}</td><td>{{ s.problem_id }}</td><td>{{ s.timestamp }}</td>
+                        <td>{% if s.score is defined %}<span class="score-box">{{ s.score }}점</span>{% else %}-{% endif %}</td>
+                        <td>
+                            <a href="/teacher/view/{{ s.filename }}" class="btn btn-sm btn-blue">코드 보기</a>
+                            <button class="btn btn-sm btn-red" onclick="deleteSubmission('{{ s.filename }}')">삭제</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    {% if not submissions %}
+                    <tr><td colspan="6" style="text-align:center; padding:30px; color:#888;">제출된 과제가 없습니다.</td></tr>
+                    {% endif %}
+                </tbody>
+            </table>
+            <div style="margin-top:20px; text-align: right;">
+                <button class="btn btn-green" onclick="judgeAll()">전체 자동 채점</button>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>파일 공유 관리 (샌드박스)</h2>
+            <form action="/teacher/upload_file" method="post" enctype="multipart/form-data" style="margin-bottom:20px; background:#f8f9fa; padding:15px; border-radius:8px; display:flex; gap:10px; align-items:center;">
+                <input type="file" name="file"><button type="submit" class="btn btn-blue">파일 업로드</button>
+            </form>
+            <table>
+                <thead><tr><th>파일명</th><th>크기</th><th>관리</th></tr></thead>
+                <tbody>
+                    {% for f in shared_files %}
+                    <tr><td>{{ f.name }}</td><td>{{ f.size }} B</td><td><button class="btn btn-sm btn-red" onclick="deleteFile('{{ f.name }}')">삭제</button></td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // 1. 페이지 로드 시 인증 상태 확인 및 자동 포커스
+        window.onload = () => {
+            // 이미 인증된 상태라면 비밀번호 창 숨기기
+            if (sessionStorage.getItem('teacher_auth') === 'true') {
+                document.getElementById('auth-overlay').style.display = 'none';
+            } else {
+                document.getElementById('auth-pwd').focus();
+            }
+        };
+
+        // 2. 인증 함수 (성공 시 세션에 저장)
+        function verifyAuth() {
+            const pwd = document.getElementById('auth-pwd').value;
+            if (pwd === '1234') { // 실제 비밀번호로 수정 가능
+                sessionStorage.setItem('teacher_auth', 'true'); // 인증 상태 저장
+                document.getElementById('auth-overlay').style.display = 'none';
+            } else {
+                alert('비밀번호가 틀렸습니다.');
+                document.getElementById('auth-pwd').value = '';
+                document.getElementById('auth-pwd').focus();
+            }
+        }
+
+        // 3. 기존 기능 함수들
+        function judgeAll() { alert('전체 채점을 시작합니다.'); location.reload(); }
+        function deleteSubmission(fn) { if(confirm('삭제할까요?')) fetch('/teacher/delete_submission',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({filename:fn})}).then(()=>location.reload()); }
+        function deleteFile(n) { if(confirm('삭제할까요?')) fetch('/teacher/delete_file',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({filename:n})}).then(()=>location.reload()); }
+    </script>
+</body>
+</html>

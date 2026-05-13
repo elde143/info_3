@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "title": "1학기 수행평가",
+    "desc": "helloworld 출력",
+    "initial_code": "print(\"Hello, World!\")\n",
+    "test_cases": [
+      {
+        "output": "Hello, World!"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "📝 수행평가 1: 편의점 결제 금액 계산기",
+    "desc": "사용자로부터 과자의 가격과 구매할 개수를 차례대로 입력받아, 총 결제 금액을 계산하여 출력하는 프로그램을 작성하세요.\n\n[조건]\n1. 첫 번째 줄에 과자의 가격(정수)을 입력받습니다.\n2. 두 번째 줄에 구매할 개수(정수)를 입력받습니다.\n3. 총 결제 금액은 반드시 '총 금액: OOO원' 형태로 출력해야 합니다.",
+    "initial_code": "# 1. 과자 가격을 정수로 입력받기\nprice = \n\n# 2. 구매 개수를 정수로 입력받기\ncount = \n\n# 3. 총 금액 계산 및 형식에 맞춰 출력하기\n\n",
+    "test_cases": [
+      {"input": "1500\n3", "output": "총 금액: 4500원"},
+      {"input": "2000\n5", "output": "총 금액: 10000원"}
+    ],
+    "category": "수행평가",
+    "model_answer": "price = int(input())\ncount = int(input())\ntotal = price * count\nprint(f'총 금액: {total}원')"
+  },
+  {
+    "id": 3,
+    "title": "📝 수행평가 2: 놀이기구 탑승 가능 여부 확인",
+    "desc": "놀이공원의 롤러코스터는 키가 140cm 이상이어야 탑승할 수 있습니다. 사용자의 키를 입력받아 탑승 가능 여부를 알려주는 프로그램을 작성하세요.\n\n[조건]\n1. 키(정수)를 입력받습니다.\n2. 키가 140 이상이면 '탑승 가능합니다.'를 출력합니다.\n3. 키가 140 미만이면 '탑승할 수 없습니다.'를 출력합니다.",
+    "initial_code": "# 1. 사용자의 키를 정수로 입력받기\nheight = \n\n# 2. 조건문을 사용하여 140 이상인지 확인하고 알맞은 문구 출력하기\nif :\n    \nelse:\n    \n",
+    "test_cases": [
+      {"input": "145", "output": "탑승 가능합니다."},
+      {"input": "130", "output": "탑승할 수 없습니다."},
+      {"input": "140", "output": "탑승 가능합니다."}
+    ],
+    "category": "수행평가",
+    "model_answer": "height = int(input())\nif height >= 140:\n    print('탑승 가능합니다.')\nelse:\n    print('탑승할 수 없습니다.')"
+  },
+  {
+    "id": 4,
+    "title": "📝 수행평가 3: 로켓 발사 카운트다운",
+    "desc": "로켓을 발사하기 위해 카운트다운을 하려고 합니다. 시작 숫자를 입력받고, 그 숫자부터 1까지 거꾸로 1초에 하나씩 세는 것처럼 한 줄에 하나씩 출력한 뒤, 마지막에 '발사!'를 출력하는 프로그램을 작성하세요.\n\n[조건]\n1. 시작 숫자(정수)를 입력받습니다.\n2. 시작 숫자부터 1까지 감소하며 한 줄에 하나씩 출력합니다.\n3. 숫자 출력이 모두 끝나면 마지막 줄에 '발사!'라고 출력합니다.",
+    "initial_code": "# 1. 시작 숫자를 정수로 입력받기\nstart_num = \n\n# 2. 반복문을 활용하여 카운트다운 출력하기\n\n\n# 3. 반복문이 끝난 후 '발사!' 출력하기\n\n",
+    "test_cases": [
+      {"input": "3", "output": "3\n2\n1\n발사!"},
+      {"input": "5", "output": "5\n4\n3\n2\n1\n발사!"}
+    ],
+    "category": "수행평가",
+    "model_answer": "start_num = int(input())\nwhile start_num > 0:\n    print(start_num)\n    start_num -= 1\nprint('발사!')"
+  }
+]

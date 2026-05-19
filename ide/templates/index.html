@@ -563,6 +563,7 @@
             document.getElementById('current-practice-desc').textContent = '원하는 코드를 자유롭게 작성하거나, 좌측에서 연습문제를 선택하세요.';
             INITIAL_CODE = ''; editor.setValue(INITIAL_CODE); clearOutput();
             document.getElementById('judgeResult').style.display = 'none';
+            document.querySelector('.container').scrollTop = 0;
         }
 
         function selectPractice(index) {
@@ -572,6 +573,7 @@
             document.getElementById('current-practice-desc').textContent = p.desc || '자유롭게 연습하세요.';
             INITIAL_CODE = p.initial_code; editor.setValue(INITIAL_CODE); clearOutput();
             document.getElementById('judgeResult').style.display = 'none';
+            document.querySelector('.container').scrollTop = 0;
         }
 
         window.onload = () => {
@@ -718,7 +720,7 @@
                         name,
                         code,
                         problem_id: currentProblemId,
-                        is_final: true  // ✅ 이 줄을 반드시 추가해야 서버가 [최종]으로 저장합니다!
+                        is_final: true  
                     })
                 });
 

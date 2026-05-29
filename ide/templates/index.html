@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>파이썬 코딩 연습</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 110 110' fill='none'%3E%3Cpath d='M52.02 4.01c-13.8 0-25.1 1.9-25.1 12.3v9.5h25.8v3.6H26.92c-10.4 0-18 6.4-18 16.8v15c0 10.4 8.7 15.6 18 15.6h5.7V67.8c0-10.4 8.5-18.9 18.9-18.9h25.8V23.1c0-10.4-8.8-19.1-25.3-19.1z' fill='%233776AB'/%3E%3Cpath d='M57.98 105.99c13.8 0 25.1-1.9 25.1-12.3v-9.5H57.28v-3.6h25.82c10.4 0 18-6.4 18-16.8v-15c0-10.4-8.7-15.6-18-15.6h-5.7v9c0 10.4-8.5 18.9-18.9 18.9H32.6v25.8c0 10.4 8.8 19.1 25.38 19.1z' fill='%23FFD43B'/%3E%3Ccircle cx='37.5' cy='12.5' r='3.5' fill='%23FAF8F8'/%3E%3Ccircle cx='72.5' cy='97.5' r='3.5' fill='%23FAF8F8'/%3E%3C/svg%3E">
     <link rel="stylesheet" href="/static/codemirror/codemirror.min.css">
     <link rel="stylesheet" href="/static/codemirror/dracula.min.css">
     <style>
@@ -561,6 +562,7 @@
             currentProblemId = null;
             document.getElementById('current-practice-title').textContent = '자유 연습 모드';
             document.getElementById('current-practice-desc').textContent = '원하는 코드를 자유롭게 작성하거나, 좌측에서 연습문제를 선택하세요.';
+            document.getElementById('current-practice-desc').innerHTML = p.desc || '자유롭게 연습하세요.';
             INITIAL_CODE = ''; editor.setValue(INITIAL_CODE); clearOutput();
             document.getElementById('judgeResult').style.display = 'none';
             
@@ -575,6 +577,7 @@
             currentProblemId = p.id;
             document.getElementById('current-practice-title').textContent = '연습문제 ' + (index + 1) + ': ' + p.title;
             document.getElementById('current-practice-desc').textContent = p.desc || '자유롭게 연습하세요.';
+            document.getElementById('current-practice-desc').innerHTML = p.desc || '자유롭게 연습하세요.';
             INITIAL_CODE = p.initial_code; editor.setValue(INITIAL_CODE); clearOutput();
             document.getElementById('judgeResult').style.display = 'none';
             

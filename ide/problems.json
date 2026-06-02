@@ -568,7 +568,7 @@
   },
   {
     "id": 708,
-    "title": "🔥 [반복-고수] N개 숫자 중 최고 미남 찾기 (최댓값 알고리즘)",
+    "title": "🔥 [반복-고수] N개 숫자 중 최고값 찾기 (최댓값 알고리즘)",
     "desc": "[고수용 도전] 첫 번째 줄에 입력받을 정수의 개수 <b>N</b>이 주어집니다. 이후 두 번째 줄부터 <b>N</b>개의 숫자가 차례대로 하나씩 입력됩니다. 입력받은 수 중에서 가장 큰 <b>'최댓값'</b> 딱 하나만 찾아서 출력하세요.\n\n* 주의: <b>max() 함수나 리스트([])는 일절 사용할 수 없으며</b>, 오직 반복문(for)과 변수 비교(if)만으로 해결해야 합니다.\n\n* 힌트: 루프를 돌기 전에 최댓값을 임시 보관할 바구니 <b>max_value</b>에 아주 작은 수인 <b>-999999</b>를 먼저 담아둡니다. 그리고 새로운 숫자가 입력될 때마다 '내가 갖고 있는 최댓값보다 더 큰가?' 비교하여 참이면 그 숫자로 바구니를 업데이트하세요!",
     "initial_code": "n = int(input())\nmax_value = -999999\n# n번 반복하며 숫자를 입력받고, 최댓값을 비교해 업데이트하는 알고리즘을 구축해 보세요.\n",
     "test_cases": [
@@ -678,6 +678,107 @@
     "category": "⚡연습용 문제⚡",
     "model_answer": "n = int(input())\ntotal = 0\nfor i in range(n):\n    val = int(input())\n    total += val\nprint(total)",
     "answer_password": "8"
+  },
+  {
+    "id": 9,
+    "title": "고수용 문제 1번",
+    "desc": "첫 번째 줄에 숫자의 개수 <b>N</b>이 주어집니다. 이후 두 번째 줄부터 <b>N</b>개의 정수가 차례대로 하나씩 입력됩니다. 입력받은 숫자들 중 **홀수의 개수**가 총 몇 개인지 세어서 출력하는 프로그램을 작성하세요.\n\n* 힌트: 루프를 돌기 전에 개수를 셀 변수 `count = 0`을 만듭니다. 숫자를 2로 나눈 나머지가 1이면(`val % 2 == 1`) 홀수이므로, 이때마다 `count += 1`을 해줍니다.",
+    "initial_code": "n = int(input())\ncount = 0\n# n번 반복하며 홀수의 개수를 누적하여 세어보세요.\n",
+    "test_cases": [
+      {"input": "5\n3\n8\n5\n7\n2", "output": "3"},
+      {"input": "3\n4\n6\n10", "output": "0"}
+    ],
+    "category": "🔥고수용 문제🔥",
+    "model_answer": "n = int(input())\ncount = 0\nfor i in range(n):\n    val = int(input())\n    if val % 2 == 1:\n        count += 1\nprint(count)",
+    "answer_password": "9"
+  },
+  {
+    "id": 10,
+    "title": "고수용 문제 2번",
+    "desc": "첫 번째 줄에 숫자의 개수 <b>N</b>이 주어집니다. 이후 두 번째 줄부터 <b>N</b>개의 숫자가 차례대로 입력됩니다. 입력받은 수 중에서 **가장 작은 값(최솟값)** 딱 하나만 찾아서 출력하세요.\n\n* 힌트: 루프를 돌기 전에 최솟값을 임시 보관할 변수 `min_value`에 아주 큰 수인 <b>999999</b>를 먼저 담아둡니다. 그리고 새로운 숫자가 입력될 때마다 비교하여 더 작다면 그 숫자로 업데이트하세요!",
+    "initial_code": "n = int(input())\nmin_value = 999999\n# n번 반복하며 입력받은 숫자 중 최솟값을 찾아 출력하세요.\n",
+    "test_cases": [
+      {"input": "3\n15\n42\n9", "output": "9"},
+      {"input": "4\n-5\n-12\n0\n-2", "output": "-12"}
+    ],
+    "category": "🔥고수용 문제🔥",
+    "model_answer": "n = int(input())\nmin_value = 999999\nfor i in range(n):\n    val = int(input())\n    if val < min_value:\n        min_value = val\nprint(min_value)",
+    "answer_password": "10"
+  },
+  {
+    "id": 11,
+    "title": "고수용 문제 3번",
+    "desc": "정수 <b>N</b>이 주어집니다. 1부터 <b>N</b>까지 숫자를 차례대로 출력하되, **5의 배수(5, 10, 15...)가 될 때마다 숫자 대신 '만세'를 출력**하는 5의 배수 게임 프로그램을 만드세요. (한 줄에 하나씩 출력)",
+    "initial_code": "n = int(input())\n# 1부터 n까지 반복하며 5의 배수일 때 '만세'를 출력하도록 조건을 나누어 보세요.\n",
+    "test_cases": [
+      {"input": "7", "output": "1\n2\n3\n4\n만세\n6\n7"}
+    ],
+    "category": "🔥고수용 문제🔥",
+    "model_answer": "n = int(input())\nfor i in range(1, n + 1):\n    if i % 5 == 0:\n        print('만세')\n    else:\n        print(i)",
+    "answer_password": "11"
+  },
+  {
+    "id": 12,
+    "title": "고수용 문제 4번",
+    "desc": "첫 번째 줄에 숫자의 개수 <b>N</b>이 주어집니다. 이후 두 번째 줄부터 <b>N</b>개의 점수가 차례대로 입력됩니다. 점수가 **80점 이상이면 '우수', 50점 이상 80점 미만이면 '보통', 50점 미만이면 '노력'**을 각 점수가 입력될 때마다 즉시 출력하세요.\n\n* 힌트: `if - elif - else` 구조를 `for`문 안에서 사용해야 합니다.",
+    "initial_code": "n = int(input())\n# n번 반복하며 입력되는 점수마다 등급을 판정해 출력하세요.\n",
+    "test_cases": [
+      {"input": "3\n85\n45\n70", "output": "우수\n노력\n보통"}
+    ],
+    "category": "🔥고수용 문제🔥",
+    "model_answer": "n = int(input())\nfor i in range(n):\n    score = int(input())\n    if score >= 80:\n        print('우수')\n    elif score >= 50:\n        print('보통')\n    else:\n        print('노력')",
+    "answer_password": "12"
+  },
+  {
+    "id": 13,
+    "title": "고수용 문제 5번",
+    "desc": "양의 정수 <b>N</b>이 주어집니다. 이 숫자의 **약수**를 모두 한 줄에 하나씩 오름차순으로 출력하는 프로그램을 작성하세요.\n\n* 힌트: 어떤 수 `N`을 `i`로 나눈 나머지가 0이면(`N % i == 0`), `i`는 `N`의 약수입니다. 1부터 `N`까지 모두 조사해 보세요.",
+    "initial_code": "n = int(input())\n# 1부터 n까지의 숫자 중 n의 약수만 골라 출력하는 반복문을 완성하세요.\n",
+    "test_cases": [
+      {"input": "6", "output": "1\n2\n3\n6"},
+      {"input": "5", "output": "1\n5"}
+    ],
+    "category": "🔥고수용 문제🔥",
+    "model_answer": "n = int(input())\nfor i in range(1, n + 1):\n    if n % i == 0:\n        print(i)",
+    "answer_password": "13"
+  },
+  {
+    "id": 14,
+    "title": "고수용 문제 6번",
+    "desc": "첫 번째 줄에 숫자의 개수 <b>N</b>이 주어집니다. 이후 두 번째 줄부터 <b>N</b>개의 정수가 차례대로 입력됩니다. 입력된 숫자들 중에서 **짝수들만 골라서 더한 합계**를 구하여 출력하세요.\n\n* 힌트: `total = 0`을 만들고, `for`문 안에서 입력받은 숫자가 짝수일 때만 `total`에 누적합니다.",
+    "initial_code": "n = int(input())\ntotal = 0\n# n번 반복하며 짝수만 골라 total에 더해보세요.\n",
+    "test_cases": [
+      {"input": "4\n1\n2\n3\n4", "output": "6"},
+      {"input": "3\n5\n7\n9", "output": "0"}
+    ],
+    "category": "🔥고수용 문제🔥",
+    "model_answer": "n = int(input())\ntotal = 0\nfor i in range(n):\n    val = int(input())\n    if val % 2 == 0:\n        total += val\nprint(total)",
+    "answer_password": "14"
+  },
+  {
+    "id": 15,
+    "title": "고수용 문제 7번",
+    "desc": "정수 <b>N</b>이 주어집니다. 1부터 <b>N</b>까지의 자연수 중에서 **3의 배수도 아니고, 5의 배수도 아닌 숫자**들만 골라 한 줄에 하나씩 출력하는 프로그램을 작성하세요.\n\n* 힌트: '3의 배수가 아니다'는 `i % 3 != 0` 이며, 두 조건이 모두 참이어야 하므로 논리 연산자 <b>and</b>를 사용해야 합니다.",
+    "initial_code": "n = int(input())\n# 3의 배수도 아니고 5의 배수도 아닌 수만 골라 출력하세요.\n",
+    "test_cases": [
+      {"input": "7", "output": "1\n2\n4\n7"}
+    ],
+    "category": "🔥고수용 문제🔥",
+    "model_answer": "n = int(input())\nfor i in range(1, n + 1):\n    if i % 3 != 0 and i % 5 != 0:\n        print(i)",
+    "answer_password": "15"
+  },
+  {
+    "id": 16,
+    "title": "고수용 문제 8번",
+    "desc": "어떤 도시의 버스 요금은 나이에 따라 다릅니다. **13세 이하 어린이 요금은 500원, 14세 이상 19세 이하 청소년 요금은 1000원, 20세 이상 성인 요금은 1500원**입니다.\n첫 번째 줄에 탑승할 승객의 수 <b>N</b>이 주어지고, 두 번째 줄부터 <b>N</b>명의 나이가 차례대로 입력될 때, 이 승객들이 내야 하는 **버스 요금의 총합**을 계산하여 출력하세요.",
+    "initial_code": "n = int(input())\ntotal_fare = 0\n# n명 승객의 나이를 입력받아 요금을 total_fare에 누적해 보세요.\n",
+    "test_cases": [
+      {"input": "3\n10\n16\n25", "output": "3000"},
+      {"input": "2\n12\n13", "output": "1000"}
+    ],
+    "category": "🔥고수용 문제🔥",
+    "model_answer": "n = int(input())\ntotal_fare = 0\nfor i in range(n):\n    age = int(input())\n    if age <= 13:\n        total_fare += 500\n    elif age <= 19:\n        total_fare += 1000\n    else:\n        total_fare += 1500\nprint(total_fare)",
+    "answer_password": "16"
   },
   {
     "id": 801,

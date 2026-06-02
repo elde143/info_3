@@ -487,9 +487,12 @@
   {
     "id": 701,
     "title": "🔄 [반복-1] 복습: 미세먼지 경보 판정",
-    "desc": "[복습] 수치 pm이 80 초과이면 '나쁨', 아니면 '보통'을 정석대로 출력하세요.",
-    "initial_code": "pm = int(input())\n",
-    "test_cases": [{"input": "85", "output": "나쁨"}],
+    "desc": "[복습] 미세먼지 수치 <b>pm</b>이 <b>80 초과</b>이면 <b>'나쁨'</b>, 아니면 <b>'보통'</b>을 조건문(if-else)을 사용해 정석대로 출력하세요.",
+    "initial_code": "pm = int(input())\n# if-else 구조를 사용하여 조건 분기를 완성하세요.\n",
+    "test_cases": [
+      {"input": "85", "output": "나쁨"},
+      {"input": "60", "output": "보통"}
+    ],
     "category": "7차시: 반복 구조와 루프 순서도",
     "model_answer": "pm = int(input())\nif pm > 80:\n    print('나쁨')\nelse:\n    print('보통')",
     "answer_password": "701"
@@ -497,9 +500,12 @@
   {
     "id": 702,
     "title": "🔄 [반복-2] 복습: 자동 요금 정산",
-    "desc": "[복습] 나이 age가 20 이상이면 1250, 아니면 450을 출력하세요.",
-    "initial_code": "age = int(input())\n",
-    "test_cases": [{"input": "15", "output": "450"}],
+    "desc": "[복습] 나이 <b>age</b>가 <b>20 이상</b>이면 성인 요금인 <b>1250</b>을, 20세 미만이면 어린이 요금인 <b>450</b>을 출력해 보세요.",
+    "initial_code": "age = int(input())\n# 성인과 어린이 요금 분기를 작성하세요.\n",
+    "test_cases": [
+      {"input": "25", "output": "1250"},
+      {"input": "15", "output": "450"}
+    ],
     "category": "7차시: 반복 구조와 루프 순서도",
     "model_answer": "age = int(input())\nif age >= 20:\n    print(1250)\nelse:\n    print(450)",
     "answer_password": "702"
@@ -507,8 +513,8 @@
   {
     "id": 703,
     "title": "🔁 [반복-3] 지정된 횟수만큼 반복하기(range)",
-    "desc": "[수업] 순서도에서 선이 위로 되돌아가서 도는 구조를 '반복'이라 합니다. `for i in range(5):`를 사용하여 'Hello'를 5번 출력하세요.",
-    "initial_code": "# range 안에 알맞은 반복 횟수를 넣으세요.\nfor i in range():\n    print('Hello')",
+    "desc": "[수업] 순서도에서 화살표가 다시 위쪽 조건문으로 되돌아가는 흐름을 코딩에서는 '반복'이라 부릅니다.\n파이썬의 <b>for i in range(5):</b> 구조를 완성하여 화면에 <b>'Hello'</b>를 정확히 5번 출력해 보세요.",
+    "initial_code": "# range() 괄호 안에 알맞은 반복 횟수를 채워 넣으세요.\nfor i in range():\n    print('Hello')",
     "test_cases": [{"output": "Hello\nHello\nHello\nHello\nHello"}],
     "category": "7차시: 반복 구조와 루프 순서도",
     "model_answer": "for i in range(5):\n    print('Hello')",
@@ -516,9 +522,9 @@
   },
   {
     "id": 704,
-    "title": "🔁 [반복-4] 카운트다운 숫자 출력",
-    "desc": "[수업] 반복문 변수 i를 활용하면 숫자를 바꿀 수 있습니다. range(3)을 실행하면 i는 0, 1, 2로 변합니다. 변수 i를 그대로 출력하여 0부터 2까지 나오게 하세요.",
-    "initial_code": "for i in range(3):\n    # i를 출력하세요.\n",
+    "title": "🔁 [반복-4] 카운터 변수의 변화 출력",
+    "desc": "[수업] 반복문 변수 <b>i</b>는 컴퓨터가 루프를 돌 때마다 값이 자동으로 변합니다.\n<b>for i in range(3):</b>을 실행하면 i는 <b>0, 1, 2</b> 순서대로 바뀝니다. 변수 <b>i</b>의 값을 직접 출력하여 숫자가 차례로 출력되게 하세요.",
+    "initial_code": "for i in range(3):\n    # 카운터 변수 i를 화면에 출력하는 한 줄의 코드를 작성하세요.\n",
     "test_cases": [{"output": "0\n1\n2"}],
     "category": "7차시: 반복 구조와 루프 순서도",
     "model_answer": "for i in range(3):\n    print(i)",
@@ -527,28 +533,34 @@
   {
     "id": 705,
     "title": "🔁 [반복-5] 내가 원하는 만큼 루프 돌리기",
-    "desc": "[수업] 숫자를 입력받아 변수 n에 저장합니다. n번만큼 반복하여 '반복!' 글자를 화면에 출력하는 순서도 로직을 구현하세요.",
-    "initial_code": "n = int(input())\n# n을 반복 횟수로 사용하세요.\nfor i in range():\n    print('반복!')",
-    "test_cases": [{"input": "3", "output": "반복!\n반복!\n반복!"}],
+    "desc": "[수업] 정수 <b>n</b>을 키보드로 입력받습니다. 입력받은 수 <b>n</b>번만큼 반복하여 <b>'반복!'</b> 글자를 화면에 출력하는 똑똑한 제어 루프를 구현하세요.\n\n* 힌트: range(5)가 5번 돌듯이, range()의 괄호 안에 숫자가 담긴 변수 이름을 넣으면 됩니다.",
+    "initial_code": "n = int(input())\n# 입력받은 n을 횟수로 사용하여 for 루프를 채워 넣으세요.\nfor i in range():\n    print('반복!')",
+    "test_cases": [
+      {"input": "3", "output": "반복!\n반복!\n반복!"},
+      {"input": "2", "output": "반복!\n반복!"}
+    ],
     "category": "7차시: 반복 구조와 루프 순서도",
     "model_answer": "n = int(input())\nfor i in range(n):\n    print('반복!')",
     "answer_password": "705"
   },
   {
     "id": 706,
-    "title": "💡 [반복-6] 문제해결: 응원단 로봇 만들기",
-    "desc": "[문제해결] 정수 n을 입력받아, 1부터 n까지의 숫자를 한 줄씩 차례대로 외치는 로봇 알고리즘을 코딩하세요.\n💡 힌트: range(n) 돌릴 때 i가 0부터 시작하므로 출력할 때는 `i + 1`을 출력하면 됩니다.",
-    "initial_code": "n = int(input())\n",
-    "test_cases": [{"input": "3", "output": "1\n2\n3"}],
+    "title": "💡 [반복-6] 문제해결: 1부터 N까지 외치는 응원단 로봇",
+    "desc": "[문제해결] 정수 <b>n</b>을 입력받아, <b>1부터 n까지</b>의 숫자를 한 줄씩 차례대로 힘차게 외치는 응원 로봇 알고리즘을 코딩하세요.\n\n* 힌트: range(n) 루프를 돌 때 변수 <b>i</b>는 0부터 시작하므로, 출력할 때는 <b>i + 1</b>을 출력해 주어야 1부터 출력이 시작됩니다!",
+    "initial_code": "n = int(input())\n# 1부터 n까지 숫자가 나오도록 루프 안에서 변수를 조절하여 출력해 보세요.\n",
+    "test_cases": [
+      {"input": "3", "output": "1\n2\n3"},
+      {"input": "5", "output": "1\n2\n3\n4\n5"}
+    ],
     "category": "7차시: 반복 구조와 루프 순서도",
     "model_answer": "n = int(input())\nfor i in range(n):\n    print(i + 1)",
     "answer_password": "706"
   },
   {
     "id": 707,
-    "title": "💡 [반복-7] 문제해결: 구구단 3단 격파",
-    "desc": "[문제해결] 반복문을 사용해 구구단 3단을 3 * 1 = 3 부터 3 * 9 = 27 까지 연산하여 결과 값들만 한 줄씩 출력되도록 순서를 제어하세요.",
-    "initial_code": "for i in range(9):\n    ",
+    "title": "💡 [반복-7] 문제해결: 구구단 3단 정복기",
+    "desc": "[문제해결] 반복문을 사용하여 구구단 3단 계산기 프로그램을 만듭니다.\n<b>3 * 1 = 3</b>부터 <b>3 * 9 = 27</b>까지 계산하여, 그 곱셈 결과 값들(3, 6, 9... 27)만 한 줄에 하나씩 순서대로 출력되게 하세요.",
+    "initial_code": "# 1부터 9까지 총 9번 반복하여 작동하도록 range() 범위를 설계해 보세요.\nfor i in range(9):\n    ",
     "test_cases": [{"output": "3\n6\n9\n12\n15\n18\n21\n24\n27"}],
     "category": "7차시: 반복 구조와 루프 순서도",
     "model_answer": "for i in range(9):\n    print(3 * (i + 1))",
@@ -556,13 +568,116 @@
   },
   {
     "id": 708,
-    "title": "🔥 [반복-고수] N개 정수 중 최댓값 구하기 (max 함수 사용 금지)",
-    "desc": "[고수용 도전] 첫 번째 줄에 입력받을 정수의 개수 `N`이 주어집니다. 이후 두 번째 줄부터 `N`개의 정수가 차례대로 한 줄씩 입력됩니다. 입력받은 모든 수 중에서 가장 큰 '최댓값' 하나만 구해서 정확히 출력해 보세요.\n\n* 주의: 파이썬 내부의 `max()` 함수나 리스트를 절대 사용할 수 없으며, 오직 반복 구조(`for`)와 변수 비교(`if`)만으로 구해야 합니다.\n\n* 힌트: 루프를 돌기 전 최댓값 보관 바구니인 `max_value`를 극단적으로 작은 정수(예: -999999)로 미리 초기화해 둔 뒤, 루프 안에서 매번 입력되는 값과 비교하여 크면 덮어씌우는 방식으로 갱신하세요!",
-    "initial_code": "n = int(input())\nmax_value = -999999\n# for 루프와 if 비교를 통해 실시간 최댓값 갱신 알고리즘을 구현하세요.\n",
-    "test_cases": [{"input": "3\n15\n42\n9", "output": "42"}, {"input": "5\n-10\n-5\n-22\n-2\n-8", "output": "-2"}],
+    "title": "🔥 [반복-고수] N개 숫자 중 최고 미남 찾기 (최댓값 알고리즘)",
+    "desc": "[고수용 도전] 첫 번째 줄에 입력받을 정수의 개수 <b>N</b>이 주어집니다. 이후 두 번째 줄부터 <b>N</b>개의 숫자가 차례대로 하나씩 입력됩니다. 입력받은 수 중에서 가장 큰 <b>'최댓값'</b> 딱 하나만 찾아서 출력하세요.\n\n* 주의: <b>max() 함수나 리스트([])는 일절 사용할 수 없으며</b>, 오직 반복문(for)과 변수 비교(if)만으로 해결해야 합니다.\n\n* 힌트: 루프를 돌기 전에 최댓값을 임시 보관할 바구니 <b>max_value</b>에 아주 작은 수인 <b>-999999</b>를 먼저 담아둡니다. 그리고 새로운 숫자가 입력될 때마다 '내가 갖고 있는 최댓값보다 더 큰가?' 비교하여 참이면 그 숫자로 바구니를 업데이트하세요!",
+    "initial_code": "n = int(input())\nmax_value = -999999\n# n번 반복하며 숫자를 입력받고, 최댓값을 비교해 업데이트하는 알고리즘을 구축해 보세요.\n",
+    "test_cases": [
+      {"input": "3\n15\n42\n9", "output": "42"},
+      {"input": "5\n-10\n-5\n-22\n-2\n-8", "output": "-2"}
+    ],
     "category": "7차시: 반복 구조와 루프 순서도",
     "model_answer": "n = int(input())\nmax_value = -999999\nfor i in range(n):\n    val = int(input())\n    if val > max_value:\n        max_value = val\nprint(max_value)",
     "answer_password": "708"
+  },
+  {
+    "id": 1,
+    "title": "연습용 문제 1번",
+    "desc": "화면에 글자와 숫자를 함께 출력하는 연습입니다. 쉼표(,)를 사용하면 여러 데이터를 한 줄에 공백으로 구분하여 출력할 수 있습니다. 화면에 <b>정답은 100</b> 이라고 출력되도록 프로그램을 작성하세요.",
+    "initial_code": "# 쉼표를 사용하여 '정답은'과 100을 함께 출력하세요.\n",
+    "test_cases": [
+      {"input": "", "output": "정답은 100"}
+    ],
+    "category": "⚡연습용 문제⚡",
+    "model_answer": "print('정답은', 100)",
+    "answer_password": "1"
+  },
+  {
+    "id": 2,
+    "title": "연습용 문제 2번",
+    "desc": "키보드로 이름(문자열)을 입력받아 변수에 저장하고, 그 뒤에 '님 환영합니다!'를 붙여서 출력하려고 합니다. 이름을 입력받아 양식에 맞게 출력하는 코드를 완성하세요.",
+    "initial_code": "name = input()\n# 입력받은 이름 뒤에 '님 환영합니다!'를 붙여 출력하세요.\n",
+    "test_cases": [
+      {"input": "철수", "output": "철수님 환영합니다!"},
+      {"input": "영희", "output": "영희님 환영합니다!"}
+    ],
+    "category": "⚡연습용 문제⚡",
+    "model_answer": "name = input()\nprint(name + '님 환영합니다!')",
+    "answer_password": "2"
+  },
+  {
+    "id": 3,
+    "title": "연습용 문제 3번",
+    "desc": "두 개의 정수가 두 줄에 걸쳐 입력됩니다. 첫 번째 숫자를 두 번째 숫자로 나눈 <b>'나머지'</b> 값을 구하여 출력하는 프로그램을 작성하세요.\n\n* 힌트: 나머지를 구하는 연산자는 <b>%</b> 입니다.",
+    "initial_code": "a = int(input())\nb = int(input())\n# a를 b로 나눈 나머지를 구하여 출력하세요.\n",
+    "test_cases": [
+      {"input": "10\n3", "output": "1"},
+      {"input": "15\n5", "output": "0"}
+    ],
+    "category": "⚡연습용 문제⚡",
+    "model_answer": "a = int(input())\nb = int(input())\nprint(a % b)",
+    "answer_password": "3"
+  },
+  {
+    "id": 4,
+    "title": "연습용 문제 4번",
+    "desc": "입력받은 점수가 60점 이상이면 <b>'합격'</b>을 출력하고, 60점 미만이면 <b>'불합격'</b>을 출력하는 조건문 프로그램을 작성하세요.",
+    "initial_code": "score = int(input())\n# if와 else를 사용하여 합격/불합격을 판별하세요.\n",
+    "test_cases": [
+      {"input": "75", "output": "합격"},
+      {"input": "50", "output": "불합격"}
+    ],
+    "category": "⚡연습용 문제⚡",
+    "model_answer": "score = int(input())\nif score >= 60:\n    print('합격')\nelse:\n    print('불합격')",
+    "answer_password": "4"
+  },
+  {
+    "id": 5,
+    "title": "연습용 문제 5번",
+    "desc": "첫 번째 줄에 반복할 횟수 <b>N</b>이 주어집니다. `for` 반복문을 사용하여 화면에 <b>'안녕하세요'</b>라는 문장을 정확히 <b>N번</b> 출력하는 프로그램을 만드세요. (한 줄에 하나씩 출력)",
+    "initial_code": "n = int(input())\n# n번 반복하여 '안녕하세요'를 출력하는 for문을 작성하세요.\n",
+    "test_cases": [
+      {"input": "3", "output": "안녕하세요\n안녕하세요\n안녕하세요"}
+    ],
+    "category": "⚡연습용 문제⚡",
+    "model_answer": "n = int(input())\nfor i in range(n):\n    print('안녕하세요')",
+    "answer_password": "5"
+  },
+  {
+    "id": 6,
+    "title": "연습용 문제 6번",
+    "desc": "정수 <b>N</b>이 주어집니다. 1부터 <b>N</b>까지의 자연수를 한 줄에 하나씩 순서대로 출력하는 프로그램을 작성하세요.\n\n* 힌트: range() 함수에 시작 숫자와 끝 숫자를 지정할 때, 끝 숫자는 원하는 값보다 1 더 크게 적어야 함에 유의하세요.",
+    "initial_code": "n = int(input())\n# 1부터 n까지 출력하는 반복문을 완성하세요.\n",
+    "test_cases": [
+      {"input": "4", "output": "1\n2\n3\n4"}
+    ],
+    "category": "⚡연습용 문제⚡",
+    "model_answer": "n = int(input())\nfor i in range(1, n + 1):\n    print(i)",
+    "answer_password": "6"
+  },
+  {
+    "id": 7,
+    "title": "연습용 문제 7번",
+    "desc": "첫 번째 줄에 정수 <b>N</b>이 주어집니다. 1부터 <b>N</b>까지의 숫자 중에서 **3의 배수(3, 6, 9...)만 골라서** 한 줄에 하나씩 출력하는 프로그램을 작성하세요.\n\n* 힌트: for문 안에서 if문을 사용하여 숫자를 3으로 나눈 나머지가 0인지(`i % 3 == 0`) 확인하면 됩니다.",
+    "initial_code": "n = int(input())\n# 1부터 n까지의 숫자 중 3의 배수만 판별하여 출력하세요.\n",
+    "test_cases": [
+      {"input": "10", "output": "3\n6\n9"}
+    ],
+    "category": "⚡연습용 문제⚡",
+    "model_answer": "n = int(input())\nfor i in range(1, n + 1):\n    if i % 3 == 0:\n        print(i)",
+    "answer_password": "7"
+  },
+  {
+    "id": 8,
+    "title": "연습용 문제 8번",
+    "desc": "첫 번째 줄에 숫자의 개수 <b>N</b>이 주어집니다. 이후 두 번째 줄부터 <b>N</b>개의 숫자가 차례대로 하나씩 입력됩니다. 입력받은 모든 숫자들을 **더한 총합**을 구하여 출력하세요.\n\n* 힌트: 루프를 돌기 전에 합계를 저장할 변수 `total = 0`을 먼저 만들어두고, 숫자가 입력될 때마다 누적해서 더해줍니다.",
+    "initial_code": "n = int(input())\ntotal = 0\n# n번 반복하며 숫자를 입력받고 total에 누적하여 더해보세요.\n",
+    "test_cases": [
+      {"input": "3\n10\n20\n30", "output": "60"},
+      {"input": "4\n5\n5\n5\n5", "output": "20"}
+    ],
+    "category": "⚡연습용 문제⚡",
+    "model_answer": "n = int(input())\ntotal = 0\nfor i in range(n):\n    val = int(input())\n    total += val\nprint(total)",
+    "answer_password": "8"
   },
   {
     "id": 801,

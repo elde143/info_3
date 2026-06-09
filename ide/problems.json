@@ -860,7 +860,6 @@
     "model_answer": "score = [80, 95, 70, 100, 85]\ntrimmed_sum = sum(score) - max(score) - min(score)\ntrimmed_count = len(score) - 2\nprint(trimmed_sum / trimmed_count)",
     "answer_password": "808"
   }, 
-  [
   {
     "id": 17,
     "title": "연습용 문제 17번",

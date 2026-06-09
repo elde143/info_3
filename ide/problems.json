@@ -859,5 +859,107 @@
     "category": "8차시: 리스트(List) 기초와 활용",
     "model_answer": "score = [80, 95, 70, 100, 85]\ntrimmed_sum = sum(score) - max(score) - min(score)\ntrimmed_count = len(score) - 2\nprint(trimmed_sum / trimmed_count)",
     "answer_password": "808"
-  }
+  }, 
+  [
+  {
+    "id": 17,
+    "title": "연습용 문제 17번",
+    "desc": "첫 번째 줄에 숫자의 개수 <b>N</b>이 주어집니다. 이후 두 번째 줄부터 <b>N</b>개의 정수가 차례대로 하나씩 입력됩니다. 입력받은 숫자들 중 **양수(0보다 큰 수)들의 평균**을 구하여 출력하는 프로그램을 작성하세요.\n\n* 힌트: 양수의 총합을 저장할 변수(`total`)와 양수의 개수를 세어줄 변수(`count`) 2개가 필요합니다. 평균은 `total / count`로 계산합니다.",
+    "initial_code": "n = int(input())\ntotal = 0\ncount = 0\n# n번 반복하며 양수일 때만 총합과 개수를 누적하여 평균을 출력하세요.\n",
+    "test_cases": [
+      {"input": "5\n3\n-2\n5\n0\n2", "output": "3.3333333333333335"},
+      {"input": "2\n10\n20", "output": "15.0"}
+    ],
+    "category": "🔥고수용 문제🔥",
+    "model_answer": "n = int(input())\ntotal = 0\ncount = 0\nfor i in range(n):\n    val = int(input())\n    if val > 0:\n        total += val\n        count += 1\nprint(total / count)",
+    "answer_password": "17"
+  },
+  {
+    "id": 18,
+    "title": "연습용 문제 18번",
+    "desc": "정수 <b>N</b>이 주어집니다. 1부터 <b>N</b>까지의 자연수를 차례대로 한 줄에 하나씩 출력하되, **3의 배수이거나 7의 배수일 때만 숫자 대신 'PASS'를 출력**하는 프로그램을 작성하세요.\n\n* 힌트: 둘 중 하나만 만족해도 참이 되는 논리 연산자 <b>or</b>를 사용해야 합니다.",
+    "initial_code": "n = int(input())\n# 1부터 n까지 반복하며 3의 배수이거나 7의 배수일 때 조건을 나누어 처리하세요.\n",
+    "test_cases": [
+      {"input": "7", "output": "1\n2\nPASS\n4\n5\nPASS\nPASS"}
+    ],
+    "category": "🔥고수용 문제🔥",
+    "model_answer": "n = int(input())\nfor i in range(1, n + 1):\n    if i % 3 == 0 or i % 7 == 0:\n        print('PASS')\n    else:\n        print(i)",
+    "answer_password": "18"
+  },
+  {
+    "id": 19,
+    "title": "연습용 문제 19번",
+    "desc": "첫 번째 줄에 숫자의 개수 <b>N</b>이 주어집니다. 이후 두 번째 줄부터 <b>N</b>개의 정수가 입력됩니다. 이때 **바로 직전에 입력된 숫자와 '같은 숫자'가 연속으로 입력된 횟수**가 총 몇 번인지 구하여 출력하세요.\n\n* 힌트: 루프가 끝나기 직전에 현재 입력받은 변수의 값을 `before`라는 임시 변수에 대입하여 백업해두면, 다음 루프에서 새로운 숫자가 들어왔을 때 직전 값과 비교할 수 있습니다. (첫 번째 숫자는 직전 값이 없으므로 처음 `before`는 아주 특이한 값으로 초기화해 둡니다.)",
+    "initial_code": "n = int(input())\nbefore = -999999\ncount = 0\n# 직전 숫자와 연속으로 같을 때마다 count를 1씩 증가시켜 보세요.\n",
+    "test_cases": [
+      {"input": "5\n10\n10\n20\n20\n20", "output": "3"},
+      {"input": "3\n5\n6\n7", "output": "0"}
+    ],
+    "category": "🔥고수용 문제🔥",
+    "model_answer": "n = int(input())\nbefore = -999999\ncount = 0\nfor i in range(n):\n    val = int(input())\n    if val == before:\n        count += 1\n    before = val\nprint(count)",
+    "answer_password": "19"
+  },
+  {
+    "id": 20,
+    "title": "연습용 문제 20번",
+    "desc": "정수 <b>N</b>이 주어졌을 때, 1부터 <b>N</b>까지의 숫자를 전부 곱한 값인 **팩토리얼(Factorial, N!)**을 구하여 출력하는 프로그램을 작성하세요.\n\n* 힌트: 곱셈을 누적할 때는 합계와 달리 초기값이 0이 아니라 **1**이어야 합니다. `result = 1`을 만들어 두고 `for`문 안에서 숫자를 계속 곱해 나가세요 (`*=`).",
+    "initial_code": "n = int(input())\nresult = 1\n# 1부터 n까지 반복하며 result에 값을 누적하여 곱해보세요.\n",
+    "test_cases": [
+      {"input": "4", "output": "24"},
+      {"input": "5", "output": "120"}
+    ],
+    "category": "🔥고수용 문제🔥",
+    "model_answer": "n = int(input())\nresult = 1\nfor i in range(1, n + 1):\n    result *= i\nprint(result)",
+    "answer_password": "20"
+  },
+  {
+    "id": 21,
+    "title": "연습용 문제 21번",
+    "desc": "어떤 자연수 <b>N</b>이 주어졌을 때, 이 숫자가 **소수(1과 자기 자신으로만 나누어떨어지는 수)**인지 판별하는 프로그램을 만드세요. 소수가 맞으면 **'PRIME'**, 아니면 **'COMPOSITE'**를 출력해야 합니다.\n\n* 힌트: 1부터 `N`까지 반복하면서 나누어떨어지는 약수의 개수를 세어봅니다. 약수의 개수가 정확히 **2개**라면 소수입니다.",
+    "initial_code": "n = int(input())\ncount = 0\n# 1부터 n까지 약수의 개수를 세고 소수 여부를 판별해 보세요.\n",
+    "test_cases": [
+      {"input": "7", "output": "PRIME"},
+      {"input": "9", "output": "COMPOSITE"}
+    ],
+    "category": "🔥고수용 문제🔥",
+    "model_answer": "n = int(input())\ncount = 0\nfor i in range(1, n + 1):\n    if n % i == 0:\n        count += 1\nif count == 2:\n    print('PRIME')\nelse:\n    print('COMPOSITE')",
+    "answer_password": "21"
+  },
+  {
+    "id": 22,
+    "title": "연습용 문제 22번",
+    "desc": "첫 번째 줄에 숫자의 개수 <b>N</b>이 주어집니다. 이후 두 번째 줄부터 <b>N</b>개의 정수가 차례대로 입력됩니다. 이 점수들 중 **최고점(최댓값)과 최저점(최솟값)의 '차이(격차)'**를 구하여 출력하는 프로그램을 작성하세요.\n\n* 힌트: 이전 문제들에서 다룬 최댓값 알고리즘(`max_v = -999999`)과 최솟값 알고리즘(`min_v = 999999`)을 하나의 `for`문 안에서 동시에 가동한 뒤, 마지막에 두 변수를 빼주면 됩니다.",
+    "initial_code": "n = int(input())\nmax_v = -999999\nmin_v = 999999\n# n번 반복하며 최댓값과 최솟값을 동시에 찾고, 그 차이를 출력하세요.\n",
+    "test_cases": [
+      {"input": "3\n15\n42\n9", "output": "33"},
+      {"input": "4\n80\n85\n78\n92", "output": "14"}
+    ],
+    "category": "🔥고수용 문제🔥",
+    "model_answer": "n = int(input())\nmax_v = -999999\nmin_v = 999999\nfor i in range(n):\n    val = int(input())\n    if val > max_v:\n        max_v = val\n    if val < min_v:\n        min_v = val\nprint(max_v - min_v)",
+    "answer_password": "22"
+  },
+  {
+    "id": 23,
+    "title": "연습용 문제 23번",
+    "desc": "정수 <b>N</b>이 주어집니다. `for` 반복문을 중첩하여 사용하여 아래 예시와 같이 별(`*`)로 정삼각형 계단을 출력하는 프로그램을 작성하세요.\n\n* 입력 예시: 3\n* 출력 예시:\n*\n**\n***\n\n* 힌트: 바깥쪽 `for i in range(1, n + 1):` 반복문이 줄 바꿈을 담당하고, 안쪽 `for j in range(i):` 반복문이 별의 개수를 담당합니다. 파이썬에서 `print('*', end='')`를 쓰면 줄 바꿈 없이 옆으로 이어서 출력할 수 있으며, 빈 `print()`를 호출하면 줄 바꿈이 일어납니다.",
+    "initial_code": "n = int(input())\n# 중첩 반복문을 이용하여 직각삼각형 모양으로 별을 출력해 보세요.\n",
+    "test_cases": [
+      {"input": "3", "output": "*\n**\n***"},
+      {"input": "4", "output": "*\n**\n***\n****"}
+    ],
+    "category": "🔥고수용 문제🔥",
+    "model_answer": "n = int(input())\nfor i in range(1, n + 1):\n    for j in range(i):\n        print('*', end='')\n    print()",
+    "answer_password": "23"
+  },
+  {
+    "id": 24,
+    "title": "연습용 문제 24번",
+    "desc": "첫 번째 줄에 숫자의 개수 <b>N</b>이 주어집니다. 이후 두 번째 줄부터 <b>N</b>개의 점수가 차례대로 입력됩니다. 이 점수들 중 **두 번째로 큰 값(2등의 점수)**을 찾아서 출력하는 프로그램을 작성하세요. (단, 입력되는 모든 점수는 서로 다릅니다.)\n\n* 힌트: 가장 큰 값을 보관할 `max1`과 두 번째로 큰 값을 보관할 `max2` 변수를 아주 작은 값으로 만듭니다. 새로운 숫자가 입력되었을 때, 만약 현재 1등(`max1`)보다 크다면 기존 1등을 2등(`max2`)으로 밀어내고 새 숫자를 1등으로 지정합니다. 만약 1등보다는 작지만 2등(`max2`)보다 크다면 2등만 새 숫자로 교체합니다.",
+    "initial_code": "n = int(input())\nmax1 = -999999\nmax2 = -999999\n# n번 반복하며 1등 점수와 2등 점수를 유기적으로 업데이트해 보세요.\n",
+    "test_cases": [
+      {"input": "4\n70\n95\n85\n90", "output": "90"},
+      {"input": "3\n20\n10\n30", "output": "20"}
+    ],
+    "category": "🔥고수용 문제🔥",
+    "model_answer": "n = int(input())\nmax1 = -999999\nmax2 = -999999\nfor i in range(n):\n    val = int(input())\n    if val > max1:\n        max2 = max1\n        max1 = val\
 ]

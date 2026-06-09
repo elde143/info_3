@@ -949,16 +949,5 @@
     "category": "🔥고수용 문제🔥",
     "model_answer": "n = int(input())\nfor i in range(1, n + 1):\n    for j in range(i):\n        print('*', end='')\n    print()",
     "answer_password": "23"
-  },
-  {
-    "id": 24,
-    "title": "연습용 문제 24번",
-    "desc": "첫 번째 줄에 숫자의 개수 <b>N</b>이 주어집니다. 이후 두 번째 줄부터 <b>N</b>개의 점수가 차례대로 입력됩니다. 이 점수들 중 **두 번째로 큰 값(2등의 점수)**을 찾아서 출력하는 프로그램을 작성하세요. (단, 입력되는 모든 점수는 서로 다릅니다.)\n\n* 힌트: 가장 큰 값을 보관할 `max1`과 두 번째로 큰 값을 보관할 `max2` 변수를 아주 작은 값으로 만듭니다. 새로운 숫자가 입력되었을 때, 만약 현재 1등(`max1`)보다 크다면 기존 1등을 2등(`max2`)으로 밀어내고 새 숫자를 1등으로 지정합니다. 만약 1등보다는 작지만 2등(`max2`)보다 크다면 2등만 새 숫자로 교체합니다.",
-    "initial_code": "n = int(input())\nmax1 = -999999\nmax2 = -999999\n# n번 반복하며 1등 점수와 2등 점수를 유기적으로 업데이트해 보세요.\n",
-    "test_cases": [
-      {"input": "4\n70\n95\n85\n90", "output": "90"},
-      {"input": "3\n20\n10\n30", "output": "20"}
-    ],
-    "category": "🔥고수용 문제🔥",
-    "model_answer": "n = int(input())\nmax1 = -999999\nmax2 = -999999\nfor i in range(n):\n    val = int(input())\n    if val > max1:\n        max2 = max1\n        max1 = val\
+  }
 ]

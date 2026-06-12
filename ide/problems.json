@@ -1052,6 +1052,108 @@
     "category": "🔥고수용 문제🔥",
     "model_answer": "n = int(input())\nbefore = -999999\ncurrent_streak = 1\nmax_streak = 0\nfor i in range(n):\n    val = int(input())\n    if val == before:\n        current_streak += 1\n    else:\n        current_streak = 1\n    if current_streak > max_streak:\n        max_streak = current_streak\n    before = val\nprint(max_streak)",
     "answer_password": "32"
+  }, 
+  {
+    "id": 33,
+    "title": "고수용 문제 33번",
+    "desc": "1부터 정수 <b>N</b>까지 숫자를 차례대로 출력하되, 숫자에 3, 6, 9가 <b>포함되어 있는 경우</b>에는 숫자 대신 박수 소리인 <b>'짝'</b>을 출력하는 프로그램을 작성하세요.\n(단, N은 1부터 99 사이의 정수이며, 33처럼 3, 6, 9가 두 번 들어간 경우에도 '짝'은 한 번만 출력합니다.)\n\n* 힌트: 두 자릿수 i의 십의 자리는 `i // 10`, 일의 자리는 `i % 10`으로 분리할 수 있습니다. 십의 자리가 (3, 6, 9) 중 하나이거나 <b>or</b> 일의 자리가 (3, 6, 9) 중 하나인지 조건문으로 체크해 보세요.",
+    "initial_code": "n = int(input())\n# 1부터 n까지 반복하며 3, 6, 9가 포함된 숫자를 찾아 '짝'으로 바꿔보세요.\n",
+    "test_cases": [
+      {"input": "14", "output": "1\n2\n짝\n4\n5\n짝\n7\n8\n짝\n10\n11\n12\n짝\n14"}
+    ],
+    "category": "🔥고수용 문제🔥",
+    "model_answer": "n = int(input())\nfor i in range(1, n + 1):\n    tens = i // 10\n    ones = i % 10\n    if tens == 3 or tens == 6 or tens == 9 or ones == 3 or ones == 6 or ones == 9:\n        print('짝')\n    else:\n        print(i)",
+    "answer_password": "33"
+  },
+  {
+    "id": 34,
+    "title": "고수용 문제 34번",
+    "desc": "숫자의 개수 <b>N</b>이 첫 줄에 주어지고, 다음 줄부터 N개의 숫자가 차례대로 입력됩니다. 이때 <b>직전 숫자보다 값이 커졌으면 'UP', 작아졌으면 'DOWN', 같으면 'SAME'</b>을 각 줄마다 출력하는 프로그램을 작성하세요.\n(단, 가장 첫 번째로 입력된 숫자는 비교할 직전 값이 없으므로 아무것도 출력하지 않고 넘어갑니다.)\n\n* 힌트: 첫 번째 숫자는 반복문 밖에서 미리 `before = int(input())`으로 입력받아 기준을 세워두고, 나머지 `N-1`번만 루프를 돌며 비교와 업데이트를 진행합니다.",
+    "initial_code": "n = int(input())\n# 첫 번째 숫자를 미리 입력받고, 나머지 n-1개의 흐름을 제어해 보세요.\n",
+    "test_cases": [
+      {"input": "4\n10\n20\n15\n15", "output": "UP\nDOWN\nSAME"}
+    ],
+    "category": "🔥고수용 문제🔥",
+    "model_answer": "n = int(input())\nbefore = int(input())\nfor i in range(n - 1):\n    val = int(input())\n    if val > before:\n        print('UP')\n    elif val < before:\n        print('DOWN')\n    else:\n        print('SAME')\n    before = val",
+    "answer_password": "34"
+  },
+  {
+    "id": 35,
+    "title": "고수용 문제 35번",
+    "desc": "100부터 999 사이의 세 자릿수 정수 <b>N</b>이 주어집니다. 이 숫자를 뒤에서부터 읽어도 앞으로 읽은 것과 완벽히 똑같은 **'대칭수(Palindrome)'**인지 판별하는 프로그램을 만드세요. 대칭수라면 <b>'YES'</b>, 아니면 <b>'NO'</b>를 출력합니다.\n(예: 323 -> YES, 125 -> NO)\n\n* 힌트: 세 자릿수 정수가 대칭수가 되기 위해서는 <b>백의 자리 숫자와 일의 자리 숫자가 서로 완벽히 일치</b>하면 됩니다. 십의 자리는 어떤 숫자이든 상관없습니다.",
+    "initial_code": "n = int(input())\n# 백의 자리와 일의 자리를 산술 연산으로 추출해 서로 비교해 보세요.\n",
+    "test_cases": [
+      {"input": "454", "output": "YES"},
+      {"input": "123", "output": "NO"}
+    ],
+    "category": "🔥고수용 문제🔥",
+    "model_answer": "n = int(input())\nhundred = n // 100\none = n % 10\nif hundred == one:\n    print('YES')\nelse:\n    print('NO')",
+    "answer_password": "35"
+  },
+  {
+    "id": 36,
+    "title": "고수용 문제 36번",
+    "desc": "자연수 <b>N</b>이 주어집니다. 1부터 <b>N</b>까지의 모든 자연수 중에서 숫자 **7**이 총 몇 번 등장하는지 개수를 세어 출력하는 프로그램을 작성하세요.\n(단, N은 1부터 50 사이의 정수입니다.)\n\n* 힌트: N이 50 이하이므로 십의 자리가 7인 경우는 없습니다. 따라서 1부터 N까지 순회하면서, 각 숫자 `i`의 일의 자리가 7인 경우(`i % 10 == 7`)만 조건문으로 찾아내어 카운트를 올려주면 됩니다.",
+    "initial_code": "n = int(input())\ncount = 0\n# 1부터 n까지 반복하며 끝자리가 7인 숫자의 개수를 수집해 보세요.\n",
+    "test_cases": [
+      {"input": "20", "output": "2"},
+      {"input": "40", "output": "4"}
+    ],
+    "category": "🔥고수용 문제🔥",
+    "model_answer": "n = int(input())\ncount = 0\nfor i in range(1, n + 1):\n    if i % 10 == 7:\n        count += 1\nprint(count)",
+    "answer_password": "36"
+  },
+  {
+    "id": 37,
+    "title": "고수용 문제 37번",
+    "desc": "자연수 <b>N</b>이 주어집니다. 1부터 <b>N</b>까지의 자연수를 한 줄로 연산해 나가는데, **홀수는 더하고 짝수는 빼는 지그재그 연산**의 최종 결과를 구하세요.\n(예: N이 5이면, `+ 1 - 2 + 3 - 4 + 5 = 3`이 정답입니다.)\n\n* 힌트: `total = 0`을 선언하고, 1부터 N까지 순회하면서 `if i % 2 == 1:` 이면 `total += i`, 홀수가 아니면 `total -= i`를 연산해 줍니다.",
+    "initial_code": "n = int(input())\ntotal = 0\n# i가 홀수일 때와 짝수일 때의 연산자 기호를 다르게 적용해 누적해 보세요.\n",
+    "test_cases": [
+      {"input": "5", "output": "3"},
+      {"input": "6", "output": "-3"}
+    ],
+    "category": "🔥고수용 문제🔥",
+    "model_answer": "n = int(input())\ntotal = 0\nfor i in range(1, n + 1):\n    if i % 2 == 1:\n        total += i\n    else:\n        total -= i\nprint(total)",
+    "answer_password": "37"
+  },
+  {
+    "id": 38,
+    "title": "고수용 문제 38번",
+    "desc": "정수 <b>N</b>이 주어집니다. 중첩 반복문을 활용하여 세로 N행, 가로 N열 모양의 사각형 숫자 지도를 만들되, 각 칸에 **현재 행(줄)의 번호**를 채워 출력하는 프로그램을 완성하세요.\n\n* 출력 예시 (N이 3일 때):\n111\n222\n333\n\n* 힌트: 바깥쪽 루프 변수가 `i`(1부터 N까지), 안쪽 루프 변수가 `j`(N번 반복)라고 할 때, 가로로 줄바꿈 없이 출력(`end=''`)해야 하는 값은 바로 행 번호인 `i`입니다. 안쪽 루프가 끝나면 줄바꿈(`print()`)을 잊지 마세요.",
+    "initial_code": "n = int(input())\n# 중첩 반복문 안에서 어떤 변수를 고정 출력해야 할지 설계해 보세요.\n",
+    "test_cases": [
+      {"input": "3", "output": "111\n222\n333"},
+      {"input": "4", "output": "1111\n2222\n3333\n4444"}
+    ],
+    "category": "🔥고수용 문제🔥",
+    "model_answer": "n = int(input())\nfor i in range(1, n + 1):\n    for j in range(n):\n        print(i, end='')\n    print()",
+    "answer_password": "38"
+  },
+  {
+    "id": 39,
+    "title": "고수용 문제 39번",
+    "desc": "첫 번째 줄에 숫자의 개수 <b>N</b>이 주어집니다. 이후 두 번째 줄부터 <b>N</b>개의 서로 다른 정수가 차례대로 입력됩니다. 이 숫자들 중 **가장 큰 값(1등)과 두 번째로 큰 값(2등)의 차이(뺄셈)**를 출력하는 프로그램을 작성하세요.\n\n* 힌트: 역대 최댓값을 저장할 `max1`과 그 바로 다음 등수를 백업할 `max2`를 운영합니다. 새 값이 `max1`보다 크다면 원래 `max1`에 있던 값을 `max2`로 밀어내고 `max1`을 새 값으로 갈아치웁니다. 만약 `max1`보단 작지만 `max2`보다 크다면 `max2`만 새 값으로 업데이트합니다.",
+    "initial_code": "n = int(input())\nmax1 = -999999\nmax2 = -999999\n# 1등 변수와 2등 변수의 상호 연동 경신 알고리즘을 구현해 보세요.\n",
+    "test_cases": [
+      {"input": "4\n10\n40\n30\n20", "output": "10"},
+      {"input": "3\n5\n9\n2", "output": "4"}
+    ],
+    "category": "🔥고수용 문제🔥",
+    "model_answer": "n = int(input())\nmax1 = -999999\nmax2 = -999999\nfor i in range(n):\n    val = int(input())\n    if val > max1:\n        max2 = max1\n        max1 = val\n    elif val > max2:\n        max2 = val\nprint(max1 - max2)",
+    "answer_password": "39"
+  },
+  {
+    "id": 40,
+    "title": "고수용 문제 40번",
+    "desc": "자연수 <b>N</b>이 주어집니다. <b>N</b>의 **자기 자신을 제외한 모든 약수들의 총합**을 구하여 출력하는 프로그램을 작성하세요.\n(예: N이 6이면 약수는 1, 2, 3, 6이므로 자기 자신인 6을 뺀 1 + 2 + 3 = 6이 출력되어야 합니다.)\n\n* 힌트: 반복문의 범위를 `1`부터 `N - 1`까지만 돌 수 있도록 `range(1, n)`으로 지정합니다. 그리고 루프 안에서 나누어떨어지는지 검사(`n % i == 0`)하여 조건이 맞을 때만 누적해 줍니다.",
+    "initial_code": "n = int(input())\ntotal = 0\n# 반복문의 종료 경계를 잘 설정하여 약수의 총합을 구해 보세요.\n",
+    "test_cases": [
+      {"input": "6", "output": "6"},
+      {"input": "10", "output": "8"}
+    ],
+    "category": "🔥고수용 문제🔥",
+    "model_answer": "n = int(input())\ntotal = 0\nfor i in range(1, n):\n    if n % i == 0:\n        total += i\nprint(total)",
+    "answer_password": "40"
   }
 ]
 
